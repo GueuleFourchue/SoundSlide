@@ -386,29 +386,23 @@ public class ManagerMoveLanes : MonoBehaviour
         
         if (actulane.ChunckLeft != null)
         {
+            actulane.GetComponent<Renderer>().material = lastLaneMat;
 
-            if (actulane.transform.localScale.z > 10)
-                ChangeLaneMaterial(originMaterial);
-            else
-                ChangeLaneMaterial(originFastMaterial);
-
-            MoveLane(actulane.ChunckLeft.gameObject.transform);
             actulane = actulane.ChunckLeft;
+            MoveLane(actulane.transform);
 
-            ChangeLaneMaterial(laneOnMaterial);
+            lastLaneMat = actulane.GetComponent<Renderer>().material;
+            actulane.GetComponent<Renderer>().material = laneOnMaterial;
         }
         else if (actulane.ChunckRight != null)
         {
+            actulane.GetComponent<Renderer>().material = lastLaneMat;
 
-            if (actulane.transform.localScale.z > 10)
-                ChangeLaneMaterial(originMaterial);
-            else
-                ChangeLaneMaterial(originFastMaterial);
-
-            MoveLane(actulane.ChunckRight.gameObject.transform);
             actulane = actulane.ChunckRight;
+            MoveLane(actulane.transform);
 
-            ChangeLaneMaterial(laneOnMaterial);
+            lastLaneMat = actulane.GetComponent<Renderer>().material;
+            actulane.GetComponent<Renderer>().material = laneOnMaterial;
 
         }
         else
@@ -505,11 +499,6 @@ public class ManagerMoveLanes : MonoBehaviour
         transform.DOLocalMoveX(lane.localPosition.x, 0.15f);
         transform.DORotate(new Vector3(0, 0, lane.transform.eulerAngles.z), 0.15f);
         transform.DOLocalMoveY(lane.localPosition.y, 0.15f);
-    }
-
-    public void ChangeLaneMaterial(Material newMat)
-    {
-        actulane.GetComponent<Renderer>().material = newMat;
     }
 
     public void Pause()
