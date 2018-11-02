@@ -564,10 +564,7 @@ public class ManagerMoveLanes : MonoBehaviour
     {
         colorGradingLayer.saturation.value = lowSaturation;
 
-        Debug.Log(colorGradingLayer.saturation.value);
-
         audioMixer.SetFloat("LowPassFrequency", lowPassValue);
-        audioMixer.SetFloat("FlangerWetLevel", 0f);
         float value = 0;
         float time = 0;
         while (value < 22000f)
@@ -576,13 +573,12 @@ public class ManagerMoveLanes : MonoBehaviour
             audioMixer.GetFloat("LowPassFrequency", out value);
 
             audioMixer.SetFloat("LowPassFrequency", lowPassValue + (time/invuDuration)*(22000- lowPassValue));
-            audioMixer.SetFloat("FlangerWetLevel", (time / invuDuration)*-80f);
             colorGradingLayer.saturation.value = lowSaturation + ((time / invuDuration) * Mathf.Abs(originSaturation - lowSaturation));
             yield return null;
         }
-        Debug.Log(colorGradingLayer.saturation.value);
 
     }
+
     public void ResetLives()
     {
         lives = livesCount;
@@ -590,7 +586,6 @@ public class ManagerMoveLanes : MonoBehaviour
         sphere.DOScale(1.5f, 0.4f);
 
         audioMixer.SetFloat("LowPassFrequency", 22000f);
-        audioMixer.SetFloat("FlangerWetLevel", -80f);
         colorGradingLayer.saturation.value = originSaturation;
     }
 }

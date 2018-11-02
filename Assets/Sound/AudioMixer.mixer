@@ -19,8 +19,6 @@ AudioMixerController:
     name: volume
   - guid: 7ed892d216968e44c9ff894cf1d2be54
     name: LowPassFrequency
-  - guid: f39d36257f39fe147a4a2cf8ac56eed4
-    name: FlangerWetLevel
   m_AudioMixerGroupViews:
   - guids:
     - 5903892d80223c748b0a57d54e9b0312
@@ -45,7 +43,6 @@ AudioMixerGroupController:
   m_Effects:
   - {fileID: 24400004}
   - {fileID: 244653655379899146}
-  - {fileID: 244594079617531444}
   m_UserColorIndex: 6
   m_Mute: 0
   m_Solo: 0
@@ -86,10 +83,13 @@ AudioMixerSnapshotController:
     f39d36257f39fe147a4a2cf8ac56eed4: -80
     f69b1c8514f4a584e99e63d7f27d4eeb: 1
     fd6ba295a132ba44da7d9bfc6e5f2e48: 0.9
+    91bc7196d90064d4b9c8daea8b83baab: 1
     1f3d08c72b16efd49a534de5c94c2edb: 98
     f565a44853d88fb4692dd17c5b70b669: 0
     0d0cf488e0265da448dc10cb6ea86040: 0
+    9a56c6e9076f21942b264bf6baac15c9: -80
     369ffe1a50fdd1a4ea622d4c761ce957: 1463
+    c559657a00c43264e8ae59512f1754b3: -80
     b42fac4b4ce728b46af44b4d11d1b0dd: 600
     f3c30c7c86986482d828eee22a1462d5: 952
     0db449cd87310af4fbaed788d08a501e: 0.6
@@ -130,27 +130,6 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
---- !u!244 &244594079617531444
-AudioMixerEffectController:
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_EffectID: bc9b9ae73fc996043b8adb657aa142a8
-  m_EffectName: Flange
-  m_MixLevel: f39d36257f39fe147a4a2cf8ac56eed4
-  m_Parameters:
-  - m_ParameterName: Drymix
-    m_GUID: 7dee869e0e0e38b469d3c19c0d05fa83
-  - m_ParameterName: Wetmix
-    m_GUID: d15e50194cd748849b6002fd43132f35
-  - m_ParameterName: Depth
-    m_GUID: c50b1b24444c6834f927747a2268d168
-  - m_ParameterName: Rate
-    m_GUID: 4af44bdab07fc6e4493c757e91628fca
-  m_SendTarget: {fileID: 0}
-  m_EnableWetMix: 1
-  m_Bypass: 0
 --- !u!244 &244653655379899146
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
