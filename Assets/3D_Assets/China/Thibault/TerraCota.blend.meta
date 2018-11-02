@@ -1,0 +1,171 @@
+fileFormatVersion: 2
+guid: e3dc5e49947171644aaf82b211ec4f71
+timeCreated: 1512123360
+licenseType: Pro
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Body
+    100002: Body_001
+    100004: Bras_Droit
+    100006: Bras_Gauche
+    100008: Helmet
+    100010: Helmet_2
+    100012: Jambe_Droite
+    100014: Jambe_Gauche
+    100016: Jupe
+    100018: Main_droite
+    100020: Main_Gauche
+    100022: Pied_Droit
+    100024: Pied_Gauche
+    100026: SpearBody
+    100028: SpearHead
+    100030: //RootNode
+    100032: Tete
+    400000: Body
+    400002: Body_001
+    400004: Bras_Droit
+    400006: Bras_Gauche
+    400008: Helmet
+    400010: Helmet_2
+    400012: Jambe_Droite
+    400014: Jambe_Gauche
+    400016: Jupe
+    400018: Main_droite
+    400020: Main_Gauche
+    400022: Pied_Droit
+    400024: Pied_Gauche
+    400026: SpearBody
+    400028: SpearHead
+    400030: //RootNode
+    400032: Tete
+    2300000: Body
+    2300002: Body_001
+    2300004: Bras_Droit
+    2300006: Bras_Gauche
+    2300008: Helmet
+    2300010: Helmet_2
+    2300012: Jambe_Droite
+    2300014: Jambe_Gauche
+    2300016: Jupe
+    2300018: Main_droite
+    2300020: Main_Gauche
+    2300022: Pied_Droit
+    2300024: Pied_Gauche
+    2300026: SpearBody
+    2300028: SpearHead
+    2300030: Tete
+    3300000: Body
+    3300002: Body_001
+    3300004: Bras_Droit
+    3300006: Bras_Gauche
+    3300008: Helmet
+    3300010: Helmet_2
+    3300012: Jambe_Droite
+    3300014: Jambe_Gauche
+    3300016: Jupe
+    3300018: Main_droite
+    3300020: Main_Gauche
+    3300022: Pied_Droit
+    3300024: Pied_Gauche
+    3300026: SpearBody
+    3300028: SpearHead
+    3300030: Tete
+    4300000: Body
+    4300002: Helmet_2
+    4300004: SpearHead
+    4300006: SpearBody
+    4300008: Main_droite
+    4300010: Bras_Droit
+    4300012: Bras_Gauche
+    4300014: Pied_Gauche
+    4300016: Jambe_Droite
+    4300018: Tete
+    4300020: Jupe
+    4300022: Jambe_Gauche
+    4300024: Body_001
+    4300026: Pied_Droit
+    4300028: Main_Gauche
+    4300030: Helmet
+    7400000: Default Take
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

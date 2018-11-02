@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 924c54249ecbcb84e80c57562b7bb2b9
+timeCreated: 1510834744
+licenseType: Pro
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - laneParent: {fileID: 1060940128650950, guid: c306f8c3cd9e14efa88cd31fb7f4eaf5,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
