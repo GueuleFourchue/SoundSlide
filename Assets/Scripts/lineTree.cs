@@ -16,7 +16,7 @@ public class lineTree : MonoBehaviour
 	private float mindist;
 	private float maxdist;
 
-	public float returnMaxR(){
+    public float returnMaxR(){
 
 		float value = (transform.position.z + (transform.localScale.z/2));
 
