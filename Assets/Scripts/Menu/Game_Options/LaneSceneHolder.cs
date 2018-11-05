@@ -5,4 +5,5 @@ using UnityEngine;
 public class LaneSceneHolder : MonoBehaviour 
 {
 	public string attachedScene;
+    public int levelIndex;
 }

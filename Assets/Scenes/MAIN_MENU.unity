@@ -21196,6 +21196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachedScene: LEVEL_BRAZIL
+  levelIndex: 1
 --- !u!65 &933724998
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23710,6 +23711,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachedScene: LEVEL_CHINA
+  levelIndex: 3
 --- !u!65 &1086146875
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25399,11 +25401,21 @@ MonoBehaviour:
   buttonRight2: 275
   leftLane: {fileID: 0}
   rightLane: {fileID: 0}
-  actualLane: {fileID: 1475534753}
+  actualLane: {fileID: 1086146873}
   anim: {fileID: 1974983571}
   audioSource: {fileID: 1178208376}
   buttonSelectionPlay: {fileID: 1737396882}
   changeSkyboxColor: {fileID: 115709634}
+  startPositions:
+  - {x: 0.6602144, y: 1.649999, z: -20.25636}
+  - {x: 35.51178, y: 1.649999, z: -28.92839}
+  - {x: 64.55708, y: 1.649999, z: -50.05196}
+  - {x: 78.54539, y: 1.649999, z: -79.09616}
+  startRotations:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 25, z: 0}
+  - {x: 0, y: 50, z: 0}
+  - {x: 0, y: 75, z: 0}
 --- !u!136 &1178208374
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -27194,6 +27206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachedScene: CREDITS
+  levelIndex: 0
 --- !u!65 &1235829766
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -32379,6 +32392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachedScene: LEVEL_EGYPT
+  levelIndex: 0
 --- !u!65 &1475534755
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -43284,6 +43298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachedScene: OPTIONS
+  levelIndex: 0
 --- !u!65 &1936929144
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -43966,6 +43981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachedScene: LEVEL_INDIA
+  levelIndex: 2
 --- !u!65 &1957628993
 BoxCollider:
   m_ObjectHideFlags: 0

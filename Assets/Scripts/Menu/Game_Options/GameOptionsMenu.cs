@@ -459,7 +459,7 @@ public class GameOptionsMenu : MonoBehaviour {
 	{
 		infoLevel.getInfoGame (peaceful, normal, flawless, speed75, speed100, speed125, speed150, noFarLanes, noNearLanes);
 		StartCoroutine (LoadAsynchronously (sceneToLoad));
-	}
+    }
 
 	public void Return()
 	{

@@ -38,6 +38,22 @@ public class AvatarMenu : MonoBehaviour {
     public ChangeSkyboxColor changeSkyboxColor;
     int laneIndex = 0;
 
+    [Header("Start Positions")]
+    public Vector3[] startPositions;
+    public Vector3[] startRotations;
+
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey("PlayedLevelIndex"))
+        {
+            int index = PlayerPrefs.GetInt("PlayedLevelIndex");
+            transform.position = startPositions[index];
+            transform.eulerAngles = startRotations[index];
+            if (PlayerPrefs.HasKey("SceneToLoad"))
+                gameOptionsMenu.sceneToLoad = PlayerPrefs.GetString("SceneToLoad");
+        }
+    }
+
     void Update () 
 	{
 		if (((Input.GetKeyDown(InputsManager.IM.left1) || Input.GetKeyDown(InputsManager.IM.left2)) && leftLane != null && canMove))
@@ -76,7 +92,11 @@ public class AvatarMenu : MonoBehaviour {
         AnimEnviro(false, actualLane);
 
         actualLane = lane;
-        gameOptionsMenu.sceneToLoad = actualLane.GetComponent<LaneSceneHolder>().attachedScene;
+        string scene = actualLane.GetComponent<LaneSceneHolder>().attachedScene;
+        gameOptionsMenu.sceneToLoad = scene;
+        if (scene != "OPTIONS" && scene != "CREDITS")
+            PlayerPrefs.SetString("SceneToLoad", scene);
+        PlayerPrefs.SetInt("PlayedLevelIndex", actualLane.GetComponent<LaneSceneHolder>().levelIndex);
 
         canMove = false;
 
