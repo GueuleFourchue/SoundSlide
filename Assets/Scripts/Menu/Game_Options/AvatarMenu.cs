@@ -36,7 +36,6 @@ public class AvatarMenu : MonoBehaviour {
 
     [Header("SkyBox")]
     public ChangeSkyboxColor changeSkyboxColor;
-    int laneIndex = 0;
 
     [Header("Start Positions")]
     public Vector3[] startPositions;
@@ -47,8 +46,11 @@ public class AvatarMenu : MonoBehaviour {
         if (PlayerPrefs.HasKey("PlayedLevelIndex"))
         {
             int index = PlayerPrefs.GetInt("PlayedLevelIndex");
-            transform.position = startPositions[index];
-            transform.eulerAngles = startRotations[index];
+            if (index >= 0)
+            {
+                transform.position = startPositions[index];
+                transform.eulerAngles = startRotations[index];
+            }
             if (PlayerPrefs.HasKey("SceneToLoad"))
                 gameOptionsMenu.sceneToLoad = PlayerPrefs.GetString("SceneToLoad");
         }
@@ -60,7 +62,6 @@ public class AvatarMenu : MonoBehaviour {
 		{
 			if (gameOptionsMenu.levelOptionsUIenabled == false) 
 			{
-                laneIndex -= 1;
                 anim.Play ("MoveLeft");
 				MoveLane(leftLane);
                 EventSystem.current.SetSelectedGameObject(buttonSelectionPlay.gameObject);
@@ -70,7 +71,6 @@ public class AvatarMenu : MonoBehaviour {
 		{
             if (gameOptionsMenu.levelOptionsUIenabled == false) 
 			{
-                laneIndex += 1;
                 anim.Play ("MoveRight");
                 MoveLane (rightLane);
                 EventSystem.current.SetSelectedGameObject(buttonSelectionPlay.gameObject);
@@ -114,7 +114,8 @@ public class AvatarMenu : MonoBehaviour {
 		canMove = true;
 
         AnimEnviro(true, actualLane);
-        changeSkyboxColor.ChangeColor(laneIndex);
+
+        changeSkyboxColor.ChangeColor(actualLane.GetComponent<LaneSceneHolder>().levelIndex);
 
     }
 

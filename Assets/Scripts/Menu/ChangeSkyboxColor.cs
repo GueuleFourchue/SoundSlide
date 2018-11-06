@@ -5,13 +5,6 @@ using DG.Tweening;
 
 public class ChangeSkyboxColor : MonoBehaviour {
 
-    public Material creditsMat;
-    public Material optionsMat;
-    public Material egyptMat;
-    public Material brazilMat;
-    public Material indiaMat;
-    public Material chinaMat;
-
     //
     public float colorLerp;
     public Color creditsColor;
@@ -29,7 +22,10 @@ public class ChangeSkyboxColor : MonoBehaviour {
     private void Start()
     {
         skyMat = RenderSettings.skybox;
-        skyMat.SetColor("_Color2", egyptColor);
+        if (PlayerPrefs.GetInt("PlayedLevelIndex") < 0)
+            skyMat.SetColor("_Color2", egyptColor);
+        else
+            ChangeColor(PlayerPrefs.GetInt("PlayedLevelIndex"));
     }
 
     private void Update()
