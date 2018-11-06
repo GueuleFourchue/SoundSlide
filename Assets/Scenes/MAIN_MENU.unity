@@ -2212,12 +2212,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bdd3f7448d961a4aab5b11e59e947fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  creditsMat: {fileID: 2100000, guid: b3c7acb1a875798458cf89bb9ff5480a, type: 2}
-  optionsMat: {fileID: 2100000, guid: 63de36648e291ea40bc0703af2f37383, type: 2}
-  egyptMat: {fileID: 2100000, guid: 661c6fe4d7e9e3a4697c53bb989852e0, type: 2}
-  brazilMat: {fileID: 2100000, guid: e8a1f859fa6a4ae42bb263c68955287a, type: 2}
-  indiaMat: {fileID: 2100000, guid: e20ad9a7d148d9747824725f6fe420a0, type: 2}
-  chinaMat: {fileID: 2100000, guid: 759ecf1609b9f4a4883b8051007ebbcf, type: 2}
   colorLerp: 3
   creditsColor: {r: 0.7137255, g: 0.54509807, b: 0.105882354, a: 0}
   optionsColor: {r: 0.6862745, g: 0.72156864, b: 0.7294118, a: 0}
@@ -27206,7 +27200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachedScene: CREDITS
-  levelIndex: 0
+  levelIndex: -2
 --- !u!65 &1235829766
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -43298,7 +43292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attachedScene: OPTIONS
-  levelIndex: 0
+  levelIndex: -1
 --- !u!65 &1936929144
 BoxCollider:
   m_ObjectHideFlags: 0

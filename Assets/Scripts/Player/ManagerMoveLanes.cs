@@ -21,7 +21,6 @@ public class ManagerMoveLanes : MonoBehaviour
     public AudioClip Mus_125;
     public AudioClip Mus_150;
 
-
     [Header("Button")]
     public KeyCode buttonLeft1;
     public KeyCode buttonLeft2;
@@ -102,6 +101,7 @@ public class ManagerMoveLanes : MonoBehaviour
     public float lowPassValue;
     public PostProcessVolume PPVolume;
     public float lowSaturation;
+    public AudioSource loseLifeAudioSource;
 
     [HideInInspector]
     public int lives;
@@ -551,6 +551,8 @@ public class ManagerMoveLanes : MonoBehaviour
 
     IEnumerator LoseLifeEffects()
     {
+        loseLifeAudioSource.Play();
+
         colorGradingLayer.saturation.value = lowSaturation;
 
         audioMixer.SetFloat("LowPassFrequency", lowPassValue);
