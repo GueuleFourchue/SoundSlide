@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class AvatarMenu : MonoBehaviour {
+public class AvatarMenu : MonoBehaviour
+{
 
-	public GameOptionsMenu gameOptionsMenu;
+    public GameOptionsMenu gameOptionsMenu;
     public CanvasGroup escape;
 
     [Header("ChinaAnims")]
@@ -18,19 +19,19 @@ public class AvatarMenu : MonoBehaviour {
     public Animator cAnim4;
 
     [Header("Button")]
-	public KeyCode buttonLeft1;
-	public KeyCode buttonLeft2;
-	public KeyCode buttonRight1;
-	public KeyCode buttonRight2;
+    public KeyCode buttonLeft1;
+    public KeyCode buttonLeft2;
+    public KeyCode buttonRight1;
+    public KeyCode buttonRight2;
 
-	public Transform leftLane;
-	public Transform rightLane;
-	public Transform actualLane;
+    public Transform leftLane;
+    public Transform rightLane;
+    public Transform actualLane;
 
     public Animator anim;
     public AudioSource audioSource;
 
-	bool canMove = true;
+    bool canMove = true;
 
     public Button buttonSelectionPlay;
 
@@ -54,37 +55,40 @@ public class AvatarMenu : MonoBehaviour {
             if (PlayerPrefs.HasKey("SceneToLoad"))
                 gameOptionsMenu.sceneToLoad = PlayerPrefs.GetString("SceneToLoad");
         }
+
+        EventSystem.current.SetSelectedGameObject(buttonSelectionPlay.gameObject);
     }
 
-    void Update () 
-	{
-		if (((Input.GetKeyDown(InputsManager.IM.left1) || Input.GetKeyDown(InputsManager.IM.left2)) && leftLane != null && canMove))
-		{
-			if (gameOptionsMenu.levelOptionsUIenabled == false) 
-			{
-                anim.Play ("MoveLeft");
-				MoveLane(leftLane);
+    void Update()
+    {
+        if (((Input.GetKeyDown(InputsManager.IM.left1) || Input.GetKeyDown(InputsManager.IM.left2)) && leftLane != null && canMove))
+        {
+            if (gameOptionsMenu.levelOptionsUIenabled == false)
+            {
+                anim.Play("MoveLeft");
+                MoveLane(leftLane);
                 EventSystem.current.SetSelectedGameObject(buttonSelectionPlay.gameObject);
             }
-		}
-		if (((Input.GetKeyDown(InputsManager.IM.right1) || Input.GetKeyDown(InputsManager.IM.right2)) && rightLane != null && canMove))
-		{
-            if (gameOptionsMenu.levelOptionsUIenabled == false) 
-			{
-                anim.Play ("MoveRight");
-                MoveLane (rightLane);
+        }
+        if (((Input.GetKeyDown(InputsManager.IM.right1) || Input.GetKeyDown(InputsManager.IM.right2)) && rightLane != null && canMove))
+        {
+            if (gameOptionsMenu.levelOptionsUIenabled == false)
+            {
+                anim.Play("MoveRight");
+                MoveLane(rightLane);
                 EventSystem.current.SetSelectedGameObject(buttonSelectionPlay.gameObject);
             }
-		}
+        }
 
-		if (Input.GetKeyDown (KeyCode.Space)) 
-		{
+        if (EventSystem.current.currentSelectedGameObject == null && canMove)
+        {
+            EventSystem.current.SetSelectedGameObject(buttonSelectionPlay.gameObject);
             //
-		}
-	}
+        }
+    }
 
-	void MoveLane(Transform lane)
-	{
+    void MoveLane(Transform lane)
+    {
         audioSource.Play();
         escape.DOKill();
         escape.DOFade(0, 0.1f);
@@ -100,18 +104,18 @@ public class AvatarMenu : MonoBehaviour {
 
         canMove = false;
 
-		transform.DOKill ();
+        transform.DOKill();
 
-		transform.parent = lane;
-		transform.DOLocalMoveX(0, 0.5f);
-		transform.DOLocalMoveY(0.4f, 0.5f);
-		transform.transform.DOLocalMoveZ (-11, 0.5f).OnComplete(() =>
-        {
-            escape.DOFade(1, 0.6f);
-        });
-		transform.DORotate(new Vector3(0, lane.transform.eulerAngles.y, 0), 0.5f);
+        transform.parent = lane;
+        transform.DOLocalMoveX(0, 0.5f);
+        transform.DOLocalMoveY(0.4f, 0.5f);
+        transform.transform.DOLocalMoveZ(-11, 0.5f).OnComplete(() =>
+       {
+           escape.DOFade(1, 0.6f);
+       });
+        transform.DORotate(new Vector3(0, lane.transform.eulerAngles.y, 0), 0.5f);
 
-		canMove = true;
+        canMove = true;
 
         AnimEnviro(true, actualLane);
 
