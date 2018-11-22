@@ -37,6 +37,7 @@ public class ManagerMovePlayer : MonoBehaviour
     public SfxMenuInGame sfxScript;
 
     [Header("Audio Offset")]
+    public float offsetMaster = 0;
     public float offset75;
     public float offset100;
     public float offset125;
@@ -152,17 +153,20 @@ public class ManagerMovePlayer : MonoBehaviour
     {
         float elapsedTime = 0;
         float startingPos = playerMove.transform.position.z;
+
         while (elapsedTime < seconds)
         {
+
             Vector3 newPosition = transform.position;
             newPosition.z = Mathf.Lerp(startingPos, posFinal.z, (elapsedTime / seconds));
 
             playerMove.transform.position = newPosition;
 
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.fixedDeltaTime;
 
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
+
         playerMove.transform.position = new Vector3(transform.position.x, transform.position.y, posFinal.z);
 
         mScore.SaveBestScore();
@@ -230,6 +234,7 @@ public class ManagerMovePlayer : MonoBehaviour
         MoveFinal = caracLevel.unitByT * (caracLevel.bpmValue / 60) * value;
 
         co = StartCoroutine(MoveDuringMusic(transform.gameObject, new Vector3(transform.position.x, transform.position.y, MoveFinal), tempsrestant));
+
         mmLanes.SwitchDeath();
         mSpeed.SetFloat("_Scale", 0.05f);
         mSpeed.SetFloat("_Speed", 0.5f);
@@ -243,7 +248,10 @@ public class ManagerMovePlayer : MonoBehaviour
 
         //To Fix the offset problem in the audio after checkpoint
         //timeAudio = transform.position.z / (10 * (caracLevel.bpmValue / 60));
-        timeAudio = (transform.position.z / (10 * (caracLevel.bpmValue / 60))) - offsetAudio;
+        timeAudio = (transform.position.z / (10 * (caracLevel.bpmValue / 60))) - (offsetAudio + offsetMaster);
+
+        if (timeAudio < 0)
+            timeAudio = 0;
 
         au.time = timeAudio;
         au.pitch = 1;
@@ -263,10 +271,14 @@ public class ManagerMovePlayer : MonoBehaviour
 
         if (transform.position.z == 0)
         {
-            yield return new WaitForSeconds(offsetAudio);
+            yield return new WaitForSecondsRealtime(offsetAudio);
         }
-        timeAudio = (transform.position.z / (10 * (caracLevel.bpmValue / 60))) - offsetAudio;
-        
+
+        timeAudio = (transform.position.z / (10 * (caracLevel.bpmValue / 60))) - (offsetAudio + offsetMaster);
+
+        if (timeAudio < 0)
+            timeAudio = 0;
+
         au.time = timeAudio;
 
         //au.pitch = 1;
@@ -343,7 +355,7 @@ public class ManagerMovePlayer : MonoBehaviour
                 offsetAudio = offset150;
                 speedAudio = speed150;
             }
-        }   
+        }
     }
 }
 
