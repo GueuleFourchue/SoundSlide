@@ -4578,6 +4578,7 @@ MonoBehaviour:
   avatarMesh: {fileID: 1261212545}
   laneCam: {fileID: 472136113}
   sfxScript: {fileID: 1325472250}
+  offsetMaster: 0
   offset75: 0
   offset100: 0
   offset125: -0.03
@@ -4635,6 +4636,7 @@ MonoBehaviour:
   PPVolume: {fileID: 472136108}
   lowSaturation: -80
   loseLifeAudioSource: {fileID: 1426467332}
+  InputDelay: 2
   lives: 0
 --- !u!4 &570689509
 Transform:
@@ -5186,7 +5188,7 @@ MonoBehaviour:
   scoreBySwitch: 10
   comboPlayer: 0.01
   merror:
-  - margeScore: 0.15
+  - margeScore: 0.21
     pourcentScore: 3
     comboOrNot: 1
   - margeScore: 0.3
