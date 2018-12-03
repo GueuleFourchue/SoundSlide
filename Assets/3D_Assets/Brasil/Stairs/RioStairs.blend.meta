@@ -1,7 +1,5 @@
 fileFormatVersion: 2
 guid: c8172fd770d29754691ceb35f023feeb
-timeCreated: 1515418625
-licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -34,12 +32,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Material
-    second: {fileID: 2100000, guid: ed005dd41fba67e43b4bfe9157487519, type: 2}
+    second: {fileID: 2100000, guid: 3d7650c400d403845b3ecdddb3fbc8a1, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: unnamed
-    second: {fileID: 2100000, guid: a1d6b72cdd810ee43bcacc6716c7f4a2, type: 2}
+    second: {fileID: 2100000, guid: 9947ff0c5a9c75c4ebd1a7e52cfa5ea4, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -70,12 +68,12 @@ ModelImporter:
   meshes:
     lODScreenPercentages: []
     globalScale: 1
-    meshCompression: 0
+    meshCompression: 3
     addColliders: 0
     importVisibility: 1
     importBlendShapes: 1
-    importCameras: 1
-    importLights: 1
+    importCameras: 0
+    importLights: 0
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
