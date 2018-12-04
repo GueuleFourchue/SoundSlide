@@ -233,7 +233,8 @@ public class ManagerMovePlayer : MonoBehaviour
 
         MoveFinal = caracLevel.unitByT * (caracLevel.bpmValue / 60) * value;
 
-        co = StartCoroutine(MoveDuringMusic(transform.gameObject, new Vector3(transform.position.x, transform.position.y, MoveFinal), tempsrestant));
+        if (transform.gameObject.activeSelf)
+            co = StartCoroutine(MoveDuringMusic(transform.gameObject, new Vector3(transform.position.x, transform.position.y, MoveFinal), tempsrestant));
 
         mmLanes.SwitchDeath();
         mSpeed.SetFloat("_Scale", 0.05f);
