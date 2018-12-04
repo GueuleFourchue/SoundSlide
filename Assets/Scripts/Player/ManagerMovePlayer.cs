@@ -73,6 +73,7 @@ public class ManagerMovePlayer : MonoBehaviour
 
     private float offsetAudio;
     private float speedAudio = 1;
+    private float particlesAnimDuration = 0.5f;
 
     void Start()
     {
@@ -83,6 +84,8 @@ public class ManagerMovePlayer : MonoBehaviour
         scaleplayer = transform.localScale;
         TriCheckPoint();
         savelANE = checkpointLane[0];
+
+        mSpeed.SetFloat("_Scale", 0f);
 
         UnitByTimeOffset();
     }
@@ -237,9 +240,9 @@ public class ManagerMovePlayer : MonoBehaviour
             co = StartCoroutine(MoveDuringMusic(transform.gameObject, new Vector3(transform.position.x, transform.position.y, MoveFinal), tempsrestant));
 
         mmLanes.SwitchDeath();
-        mSpeed.SetFloat("_Scale", 0.05f);
-        mSpeed.SetFloat("_Speed", 0.5f);
 
+        mSpeed.SetFloat("_Speed", 0.5f);
+        mSpeed.DOFloat(0.05f, "_Scale", particlesAnimDuration);
     }
 
     public void PlaySound()
@@ -308,11 +311,13 @@ public class ManagerMovePlayer : MonoBehaviour
         Camera.main.DOShakePosition(0.2f, 0.7f, 30, 50);
         laneCam.DOShakePosition(0.2f, 0.7f, 30, 50);
 
+        mSpeed.DOFloat(0f, "_Scale", particlesAnimDuration);
+
         au.DOPitch(0.95f, 0.5f).OnComplete(() =>
             {
                 au.Stop();
                 au.pitch = 1;
-                mSpeed.SetFloat("_Scale", 0.01f);
+                // mSpeed.SetFloat("_Scale", 0.01f);
 
                 Camera.main.DOFieldOfView(originFOV, 1);
                 laneCam.DOFieldOfView(originFOV, 1);
