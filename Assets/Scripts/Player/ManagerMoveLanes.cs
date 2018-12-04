@@ -9,12 +9,12 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class ManagerMoveLanes : MonoBehaviour
 {
-    
+
     [Header("UI")]
     public Transform pauseContainer;
     public Text pauseScoreText;
     public Button buttonPauseResume;
-    
+
     [Header("Audio")]
     public AudioClip Mus_75;
     public AudioClip Mus_100;
@@ -125,13 +125,13 @@ public class ManagerMoveLanes : MonoBehaviour
         mvPlayer = transform.GetComponent<ManagerMovePlayer>();
         mScore = transform.GetComponent<ManagerScore>();
 
+        ChangeOptionLevel();
         lastLaneMat = actulane.GetComponent<Renderer>().material;
         actulane.GetComponent<Renderer>().material = laneOnMaterial;
-        ChangeOptionLevel();
-
     }
 
-    public void GetInputLevel(){
+    public void GetInputLevel()
+    {
         buttonLeft1 = InputsManager.IM.left1;
         buttonLeft2 = InputsManager.IM.left2;
         buttonRight1 = InputsManager.IM.right1;
@@ -148,40 +148,40 @@ public class ManagerMoveLanes : MonoBehaviour
             float scoreChanger = 0;
 
             if (levelInfomanager.info_normal)
-            { 
+            {
                 scoreChanger += 0;
 
             }
             if (levelInfomanager.info_flawless)
-            { 
+            {
                 scoreChanger += 0;
                 mvPlayer.ChangeModeFlawless();
                 parentCheckPoint.SetActive(false);
 
             }
             if (levelInfomanager.info_speed75)
-            { 
+            {
                 scoreChanger += -0.3f;
                 mvPlayer.caracLevel.bpmValue *= 0.75f;
                 au.clip = Mus_75;
                 //LD.position = new Vector3(LD.position.x, LD.position.y, speed75Offset);
             }
             if (levelInfomanager.info_speed100)
-            { 
+            {
                 scoreChanger += 0;
                 mvPlayer.caracLevel.bpmValue *= 1f;
                 au.clip = Mus_100;
                 //LD.position = new Vector3(LD.position.x, LD.position.y, speed100Offset);
             }
             if (levelInfomanager.info_speed125)
-            { 
+            {
                 scoreChanger += 0.3f;
                 mvPlayer.caracLevel.bpmValue *= 1.25f;
                 au.clip = Mus_125;
                 //LD.position = new Vector3(LD.position.x, LD.position.y, speed125Offset);
             }
             if (levelInfomanager.info_speed150)
-            { 
+            {
                 scoreChanger += 0.6f;
                 mvPlayer.caracLevel.bpmValue *= 1.5f;
                 au.clip = Mus_150;
@@ -231,7 +231,7 @@ public class ManagerMoveLanes : MonoBehaviour
             scoreMultiplier = 1 + scoreChanger;
 
             if (levelInfomanager.info_peaceful)
-            { 
+            {
                 scoreMultiplier = 0;
                 parentCheckPoint.SetActive(false);
             }
@@ -382,8 +382,9 @@ public class ManagerMoveLanes : MonoBehaviour
         lastLaneMat = actulane.GetComponent<Renderer>().material;
     }
 
-    public void MovePeaceful(){
-        
+    public void MovePeaceful()
+    {
+
         if (actulane.ChunckLeft != null)
         {
             actulane.GetComponent<Renderer>().material = lastLaneMat;
@@ -434,7 +435,7 @@ public class ManagerMoveLanes : MonoBehaviour
                     MovePeaceful();
                     StartCoroutine(SetInvulnerability());
                 }
-                    
+
                 else
                 {
                     actulane.GetComponent<Renderer>().material = lastLaneMat;
@@ -444,7 +445,7 @@ public class ManagerMoveLanes : MonoBehaviour
 
             if (Input.GetKeyDown(buttonLeft1) || Input.GetKeyDown(buttonLeft2))
             {
-                anim.Play("Left",-1,0);
+                anim.Play("Left", -1, 0);
 
                 if (actulane.ChunckLeft != null)
                 {
@@ -462,7 +463,7 @@ public class ManagerMoveLanes : MonoBehaviour
                         {
                             CallDeadFunction();
                         }
-                    } 
+                    }
                 }
             }
 
@@ -563,7 +564,7 @@ public class ManagerMoveLanes : MonoBehaviour
             time += Time.deltaTime;
             audioMixer.GetFloat("LowPassFrequency", out value);
 
-            audioMixer.SetFloat("LowPassFrequency", lowPassValue + (time/invuDuration)*(22000- lowPassValue));
+            audioMixer.SetFloat("LowPassFrequency", lowPassValue + (time / invuDuration) * (22000 - lowPassValue));
             colorGradingLayer.saturation.value = lowSaturation + ((time / invuDuration) * Mathf.Abs(originSaturation - lowSaturation));
             yield return null;
         }
