@@ -30,6 +30,9 @@ public class ManagerMovePlayer : MonoBehaviour
     [Header("Anim")]
     public Animator anim;
 
+    [Header("Speed FX")]
+    public ParticleSystem speedFX;
+
     [Header("Player")]
     public Material mSpeed;
     public Transform avatarMesh;
@@ -86,6 +89,9 @@ public class ManagerMovePlayer : MonoBehaviour
         savelANE = checkpointLane[0];
 
         mSpeed.SetFloat("_Scale", 0f);
+
+        if (speedFX != null)
+            speedFX.Stop();
 
         UnitByTimeOffset();
     }
@@ -243,6 +249,9 @@ public class ManagerMovePlayer : MonoBehaviour
 
         mSpeed.SetFloat("_Speed", 0.5f);
         mSpeed.DOFloat(0.05f, "_Scale", particlesAnimDuration);
+
+        if (speedFX != null)
+            speedFX.Play();
     }
 
     public void PlaySound()
@@ -312,6 +321,9 @@ public class ManagerMovePlayer : MonoBehaviour
         laneCam.DOShakePosition(0.2f, 0.7f, 30, 50);
 
         mSpeed.DOFloat(0f, "_Scale", particlesAnimDuration);
+
+        if (speedFX != null)
+            speedFX.Stop();
 
         au.DOPitch(0.95f, 0.5f).OnComplete(() =>
             {

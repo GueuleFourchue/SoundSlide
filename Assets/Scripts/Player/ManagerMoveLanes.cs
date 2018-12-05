@@ -117,6 +117,7 @@ public class ManagerMoveLanes : MonoBehaviour
 
         PPVolume.profile.TryGetSettings(out colorGradingLayer);
         originSaturation = colorGradingLayer.saturation.value;
+
     }
 
     void Awake()
@@ -124,6 +125,8 @@ public class ManagerMoveLanes : MonoBehaviour
         au = gameObject.GetComponent<AudioSource>();
         mvPlayer = transform.GetComponent<ManagerMovePlayer>();
         mScore = transform.GetComponent<ManagerScore>();
+
+        ResetMaterials();
 
         ChangeOptionLevel();
         lastLaneMat = actulane.GetComponent<Renderer>().material;
@@ -579,5 +582,20 @@ public class ManagerMoveLanes : MonoBehaviour
 
         audioMixer.SetFloat("LowPassFrequency", 22000f);
         colorGradingLayer.saturation.value = originSaturation;
+    }
+
+    void OnDestroy()
+    {
+        ResetMaterials();
+    }
+
+    void ResetMaterials()
+    {
+        originMaterial.SetFloat("_Near", base_Near);
+        originMaterial.SetFloat("_Far", base_Far);
+        originMaterial.SetFloat("_Smooth", base_Smooth);
+        originFastMaterial.SetFloat("_Near", base_Near);
+        originFastMaterial.SetFloat("_Far", base_Far);
+        originFastMaterial.SetFloat("_Smooth", base_Smooth);
     }
 }
