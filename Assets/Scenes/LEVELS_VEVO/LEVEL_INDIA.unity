@@ -15,10 +15,10 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 8
-  m_Fog: 0
-  m_FogColor: {r: 0.2004758, g: 0.21154995, b: 0.2647059, a: 1}
+  m_Fog: 1
+  m_FogColor: {r: 0.43921572, g: 0.7058824, b: 0.57254905, a: 1}
   m_FogMode: 2
-  m_FogDensity: 0.0005
+  m_FogDensity: 0.008
   m_LinearFogStart: 100
   m_LinearFogEnd: 500
   m_AmbientSkyColor: {r: 0.08012543, g: 0.11556726, b: 0.19117647, a: 1}
@@ -4344,7 +4344,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 150
+  far clip plane: 300
   field of view: 95
   orthographic: 0
   orthographic size: 5
@@ -4395,7 +4395,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 5000
+  far clip plane: 300
   field of view: 95
   orthographic: 0
   orthographic size: 5
