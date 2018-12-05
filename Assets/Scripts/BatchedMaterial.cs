@@ -31,7 +31,7 @@ public class BatchedMaterial : MonoBehaviour
         SetProperties();
     }
 
-    void SetProperties()
+    public void SetProperties()
     {
         if (GetComponent<MeshRenderer>() == null)
         {
