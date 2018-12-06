@@ -15,7 +15,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 8
-  m_Fog: 1
+  m_Fog: 0
   m_FogColor: {r: 0.43921572, g: 0.7058824, b: 0.57254905, a: 1}
   m_FogMode: 2
   m_FogDensity: 0.008
@@ -4344,7 +4344,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 300
+  far clip plane: 400
   field of view: 95
   orthographic: 0
   orthographic size: 5
@@ -4395,7 +4395,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 300
+  far clip plane: 400
   field of view: 95
   orthographic: 0
   orthographic size: 5
@@ -6979,6 +6979,7 @@ GameObject:
   - component: {fileID: 1127278443}
   - component: {fileID: 1127278446}
   - component: {fileID: 1127278437}
+  - component: {fileID: 1127278438}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -7003,6 +7004,21 @@ MonoBehaviour:
   maxBlurSize: 1
   downsample: 0
   tiltShiftShader: {fileID: 4800000, guid: bf34d2a25450349699e8ae6456fa7ca9, type: 3}
+--- !u!114 &1127278438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1127278436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee4ab9821096c489f84e50f35b7b9644, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startDistance: 0
+  _useRadialDistance: 0
+  _fadeToSkybox: 0
+  _shader: {fileID: 4800000, guid: 3514cc2676a6c4db294c28459f22c359, type: 3}
 --- !u!124 &1127278443
 Behaviour:
   m_ObjectHideFlags: 0
