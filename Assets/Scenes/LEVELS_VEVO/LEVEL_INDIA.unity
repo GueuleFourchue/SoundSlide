@@ -7610,8 +7610,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraSpot: {fileID: 1745784598}
   avatar: {fileID: 570689509}
-  moveLerp: 0.2
-  rotateLerp: 0.1
+  moveLerp: 0.1
+  rotateLerp: 0.05
   xRotation: 0
 --- !u!1001 &1233008788
 Prefab:
