@@ -23,11 +23,10 @@ public class InputsManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-       
-        left1 = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("leftKey1", "Q"));
+
+        left1 = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("leftKey1", "A"));
         left2 = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("leftKey2", "LeftArrow"));
         right1 = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("rightKey1", "D"));
         right2 = (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString("rightKey2", "RightArrow"));
-
     }
 }

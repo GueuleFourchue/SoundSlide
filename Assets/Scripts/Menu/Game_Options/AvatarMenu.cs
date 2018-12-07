@@ -61,7 +61,7 @@ public class AvatarMenu : MonoBehaviour
 
     void Update()
     {
-        if (((Input.GetKeyDown(InputsManager.IM.left1) || Input.GetKeyDown(InputsManager.IM.left2)) && leftLane != null && canMove))
+        if (((Input.GetKeyDown(InputsManager.IM.left1) && leftLane != null && canMove || Input.GetKeyDown(InputsManager.IM.left2)) && leftLane != null && canMove))
         {
             if (gameOptionsMenu.levelOptionsUIenabled == false)
             {
@@ -70,7 +70,7 @@ public class AvatarMenu : MonoBehaviour
                 EventSystem.current.SetSelectedGameObject(buttonSelectionPlay.gameObject);
             }
         }
-        if (((Input.GetKeyDown(InputsManager.IM.right1) || Input.GetKeyDown(InputsManager.IM.right2)) && rightLane != null && canMove))
+        if (((Input.GetKeyDown(InputsManager.IM.right1) && rightLane != null && canMove || Input.GetKeyDown(InputsManager.IM.right2)) && rightLane != null && canMove))
         {
             if (gameOptionsMenu.levelOptionsUIenabled == false)
             {
