@@ -19,6 +19,7 @@ public class GameOptionsMenu : MonoBehaviour
 
     [Header("Options")]
     public GameObject options;
+    public GameObject optionsSelectable;
     bool optionsOn;
 
     [Header("Credits")]
@@ -507,7 +508,7 @@ public class GameOptionsMenu : MonoBehaviour
             InputsManager.IM.EnableCanvasGroup(options.GetComponent<CanvasGroup>(), 0.5f);
 
             // options.GetComponent<CanvasGroup>().DOFade(1, 0.5f);
-            EventSystem.current.SetSelectedGameObject(null);
+            EventSystem.current.SetSelectedGameObject(optionsSelectable);
         }
         else if (sceneToLoad == "CREDITS")
         {
