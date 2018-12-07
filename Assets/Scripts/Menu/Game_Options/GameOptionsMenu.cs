@@ -399,7 +399,7 @@ public class GameOptionsMenu : MonoBehaviour
         selecArrow.GetComponent<CanvasGroup>().DOFade(0, 0.05f);
     }
 
-    void OnEnable()
+    void Start()
     {
         LoadSettings();
     }
