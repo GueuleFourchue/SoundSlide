@@ -498,7 +498,7 @@ public class GameOptionsMenu : MonoBehaviour
         else
         {
             StartCoroutine(Activate());
-            EventSystem.current.SetSelectedGameObject(togglePeaceful.gameObject);
+            EventSystem.current.SetSelectedGameObject(buttonPlay.gameObject);
             //ICI
             avatarMenu.enabled = false;
             PlaySFX(sfxMenuSubmit, 0.5f);
@@ -531,7 +531,7 @@ public class GameOptionsMenu : MonoBehaviour
             levelOptionsUIenabled = true;
 
             //
-            EventSystem.current.SetSelectedGameObject(togglePeaceful.gameObject);
+            EventSystem.current.SetSelectedGameObject(buttonPlay.gameObject);
         }
     }
 
