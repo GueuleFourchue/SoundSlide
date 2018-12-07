@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 
-public class LaunchMenuAnim : MonoBehaviour {
+public class LaunchMenuAnim : MonoBehaviour
+{
 
     public Image menuGlobalBlackFade;
     public AudioSource menuMusic;
@@ -16,6 +17,7 @@ public class LaunchMenuAnim : MonoBehaviour {
 
     public IEnumerator MenuLaunch()
     {
+        menuGlobalBlackFade.DOFade(1, 0f);
         menuMusic.DOFade(0.8f, 1f);
         menuGlobalBlackFade.DOFade(0, 1.5f);
         yield return new WaitForSeconds(1.5f);
