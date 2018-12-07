@@ -91,7 +91,9 @@ public class AvatarMenu : MonoBehaviour
     {
         audioSource.Play();
         escape.DOKill();
-        escape.DOFade(0, 0.1f);
+        // escape.DOFade(0, 0.1f);
+
+        InputsManager.IM.DisableCanvasGroup(escape, 0.1f);
 
         AnimEnviro(false, actualLane);
 
@@ -111,7 +113,9 @@ public class AvatarMenu : MonoBehaviour
         transform.DOLocalMoveY(0.4f, 0.5f);
         transform.transform.DOLocalMoveZ(-11, 0.5f).OnComplete(() =>
        {
-           escape.DOFade(1, 0.6f);
+           InputsManager.IM.EnableCanvasGroup(escape, 0.6f);
+
+           //    escape.DOFade(1, 0.6f);
        });
         transform.DORotate(new Vector3(0, lane.transform.eulerAngles.y, 0), 0.5f);
 

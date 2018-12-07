@@ -129,6 +129,9 @@ public class GameOptionsMenu : MonoBehaviour
     public GameObject loadingScreen;
     public Slider loadingSlider;
 
+    [Header("Script")]
+    public MenuScript menuScript;
+
     public void Peaceful()
     {
         ToggleChangeState(ref peaceful, peacefulSprite, togglePeaceful, peacefulSpriteW, peacefulSpriteB);
@@ -402,6 +405,8 @@ public class GameOptionsMenu : MonoBehaviour
     void Start()
     {
         LoadSettings();
+
+        InputsManager.IM.DisableCanvasGroup(canvasGroup);
     }
 
     void Update()
@@ -428,28 +433,42 @@ public class GameOptionsMenu : MonoBehaviour
                 {
                     quitGameOn = false;
                     isOnMainMenu = true;
-                    quitGame.GetComponent<CanvasGroup>().DOFade(0, 0.35f).OnComplete(() =>
-                    {
-                        quitGame.SetActive(false);
-                    });
+
+                    InputsManager.IM.DisableCanvasGroup(quitGame.GetComponent<CanvasGroup>(), 0.35f);
+                    // quitGame.GetComponent<CanvasGroup>().DOFade(0, 0.35f).OnComplete(() =>
+                    // {
+                    //     quitGame.SetActive(false);
+                    // });
                     EventSystem.current.SetSelectedGameObject(buttonSelectionPlay.gameObject);
                 }
                 else if (creditsOn)
                 {
-                    credits.GetComponent<CanvasGroup>().DOFade(0, 0.2f).OnComplete(() =>
-                    {
-                        credits.SetActive(false);
-                    });
+                    InputsManager.IM.DisableCanvasGroup(credits.GetComponent<CanvasGroup>(), 0.2f);
+
+                    // credits.GetComponent<CanvasGroup>().DOFade(0, 0.2f).OnComplete(() =>
+                    // {
+                    //     credits.SetActive(false);
+                    // });
                     creditsOn = false;
                 }
                 else if (optionsOn)
                 {
-                    options.GetComponent<CanvasGroup>().DOFade(0, 0.2f).OnComplete(() =>
+                    if (menuScript.inInputMenu)
                     {
-                        options.SetActive(false);
-                    });
-                    optionsOn = false;
-                    StartCoroutine(ReturnAnim());
+                        avatarMenu.enabled = false;
+                        menuScript.BackToBaseMenu();
+                    }
+                    else
+                    {
+                        InputsManager.IM.DisableCanvasGroup(options.GetComponent<CanvasGroup>(), 0.2f);
+
+                        // options.GetComponent<CanvasGroup>().DOFade(0, 0.2f).OnComplete(() =>
+                        // {
+                        //     options.SetActive(false);
+                        // });
+                        optionsOn = false;
+                        StartCoroutine(ReturnAnim());
+                    }
                 }
                 else
                 {
@@ -484,7 +503,10 @@ public class GameOptionsMenu : MonoBehaviour
             avatarMenu.enabled = false;
             options.gameObject.SetActive(true);
             options.transform.DOKill();
-            options.GetComponent<CanvasGroup>().DOFade(1, 0.5f);
+
+            InputsManager.IM.EnableCanvasGroup(options.GetComponent<CanvasGroup>(), 0.5f);
+
+            // options.GetComponent<CanvasGroup>().DOFade(1, 0.5f);
             EventSystem.current.SetSelectedGameObject(null);
         }
         else if (sceneToLoad == "CREDITS")
@@ -493,7 +515,9 @@ public class GameOptionsMenu : MonoBehaviour
             avatarMenu.enabled = false;
             credits.gameObject.SetActive(true);
             credits.transform.DOKill();
-            credits.GetComponent<CanvasGroup>().DOFade(1, 0.5f);
+
+            InputsManager.IM.EnableCanvasGroup(credits.GetComponent<CanvasGroup>(), 0.5f);
+            // credits.GetComponent<CanvasGroup>().DOFade(1, 0.5f);
         }
         else
         {
@@ -518,13 +542,14 @@ public class GameOptionsMenu : MonoBehaviour
             container.DOKill();
             container.DOScale(new Vector3(1, 1, 1), 0.3f);
 
-            for (float t = 0.0f; t < 1.1f; t += Time.deltaTime * 6)
-            {
-                canvasGroup.alpha = Mathf.Lerp(0, 1, t);
-                yield return null;
-            }
-            canvasGroup.alpha = 1;
+            // for (float t = 0.0f; t < 1.1f; t += Time.deltaTime * 6)
+            // {
+            //     canvasGroup.alpha = Mathf.Lerp(0, 1, t);
+            //     yield return null;
+            // }
+            // canvasGroup.alpha = 1;
 
+            InputsManager.IM.EnableCanvasGroup(canvasGroup, 0.3f);
             returnToMainCanvas.SetActive(false);
 
             canToggleUI = true;
@@ -533,6 +558,8 @@ public class GameOptionsMenu : MonoBehaviour
             //
             EventSystem.current.SetSelectedGameObject(buttonPlay.gameObject);
         }
+
+        yield return 0;
     }
 
     public IEnumerator ReturnAnim()
@@ -548,12 +575,14 @@ public class GameOptionsMenu : MonoBehaviour
 
             returnToMainCanvas.SetActive(true);
 
-            for (float t = 0.0f; t < 1.1f; t += Time.deltaTime * 6)
-            {
-                canvasGroup.alpha = Mathf.Lerp(1, 0, t);
-                yield return null;
-            }
-            canvasGroup.alpha = 0;
+            InputsManager.IM.DisableCanvasGroup(canvasGroup, 0.3f);
+
+            // for (float t = 0.0f; t < 1.1f; t += Time.deltaTime * 6)
+            // {
+            //     canvasGroup.alpha = Mathf.Lerp(1, 0, t);
+            //     yield return null;
+            // }
+            // canvasGroup.alpha = 0;
 
             container.gameObject.SetActive(false);
 
@@ -566,6 +595,7 @@ public class GameOptionsMenu : MonoBehaviour
             ReturnHoverEnd();
         }
 
+        yield return 0;
     }
 
     IEnumerator GlobalScoreMultiplier()
