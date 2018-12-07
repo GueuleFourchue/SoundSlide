@@ -33,6 +33,9 @@ public class ManagerMoveLanes : MonoBehaviour
     [Header("Start Lane")]
     public lineTree actulane;
 
+    [Header("Loading Screen")]
+    public GameObject loadingScreen;
+
     [Header("Lane Shader Value")]
     public float base_Near;
     public float base_Far;
@@ -418,7 +421,7 @@ public class ManagerMoveLanes : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(buttonPause))
+        if (Input.GetKeyDown(buttonPause) && !loadingScreen.activeSelf)
         {
             Pause();
         }

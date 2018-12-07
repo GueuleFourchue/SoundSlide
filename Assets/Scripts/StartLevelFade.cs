@@ -16,6 +16,6 @@ public class StartLevelFade : MonoBehaviour
         blackFade.DOFade(0, 1.5f).OnComplete(() =>
         {
             this.gameObject.SetActive(false);
-        });
+        }).SetUpdate(true);
     }
 }

@@ -10150,6 +10150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseOptionsCanvas: {fileID: 1299944428}
   inputOptionsCanvas: {fileID: 788815640}
+  inInputMenu: 0
 --- !u!1 &370215471
 GameObject:
   m_ObjectHideFlags: 0
@@ -43732,6 +43733,7 @@ MonoBehaviour:
   sfxMenuBack: {fileID: 8300000, guid: da496447a0c31b041909790b34a20da5, type: 3}
   loadingScreen: {fileID: 1469930843}
   loadingSlider: {fileID: 580196465}
+  menuScript: {fileID: 360847604}
 --- !u!225 &1739749014
 CanvasGroup:
   m_ObjectHideFlags: 0

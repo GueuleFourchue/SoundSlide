@@ -4665,6 +4665,7 @@ MonoBehaviour:
   buttonRight2: 275
   buttonPause: 27
   actulane: {fileID: 842811553}
+  loadingScreen: {fileID: 598024527}
   base_Near: 0
   base_Far: 90
   base_Smooth: 50
