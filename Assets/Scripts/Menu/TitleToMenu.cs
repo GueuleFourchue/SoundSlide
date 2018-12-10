@@ -5,7 +5,8 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 
-public class TitleToMenu : MonoBehaviour {
+public class TitleToMenu : MonoBehaviour
+{
 
     public GameObject container;
     public GameObject Menu;
@@ -21,11 +22,14 @@ public class TitleToMenu : MonoBehaviour {
     {
         CheckIfFirstPlay();
         StartCoroutine(StartDelay());
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
-    void Update ()
+    void Update()
     {
-		if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             StartCoroutine(TitleToMenuTransition());
         }
