@@ -57,8 +57,6 @@ public class SettingsMenu : MonoBehaviour
 
     }
 
-
-
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];

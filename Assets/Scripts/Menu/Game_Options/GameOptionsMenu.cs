@@ -133,6 +133,8 @@ public class GameOptionsMenu : MonoBehaviour
     [Header("Script")]
     public MenuScript menuScript;
 
+    private GameObject _previousSelection = null;
+
     public void Peaceful()
     {
         ToggleChangeState(ref peaceful, peacefulSprite, togglePeaceful, peacefulSpriteW, peacefulSpriteB);
@@ -408,6 +410,9 @@ public class GameOptionsMenu : MonoBehaviour
         LoadSettings();
 
         InputsManager.IM.DisableCanvasGroup(canvasGroup);
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
@@ -461,6 +466,9 @@ public class GameOptionsMenu : MonoBehaviour
                     }
                     else
                     {
+                        Cursor.visible = false;
+                        Cursor.lockState = CursorLockMode.Locked;
+
                         InputsManager.IM.DisableCanvasGroup(options.GetComponent<CanvasGroup>(), 0.2f);
 
                         // options.GetComponent<CanvasGroup>().DOFade(0, 0.2f).OnComplete(() =>
@@ -473,11 +481,20 @@ public class GameOptionsMenu : MonoBehaviour
                 }
                 else
                 {
+                    Cursor.visible = false;
+                    Cursor.lockState = CursorLockMode.Locked;
+
                     StartCoroutine(ReturnAnim());
                 }
             }
 
         }
+
+        if (EventSystem.current.currentSelectedGameObject != null)
+            _previousSelection = EventSystem.current.currentSelectedGameObject;
+        else
+            EventSystem.current.SetSelectedGameObject(_previousSelection);
+
     }
 
     public void Play()
@@ -509,6 +526,9 @@ public class GameOptionsMenu : MonoBehaviour
 
             // options.GetComponent<CanvasGroup>().DOFade(1, 0.5f);
             EventSystem.current.SetSelectedGameObject(optionsSelectable);
+
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
         else if (sceneToLoad == "CREDITS")
         {
@@ -715,6 +735,9 @@ public class GameOptionsMenu : MonoBehaviour
         avatarMenu.enabled = true;
 
         StartCoroutine(ReturnAnim());
+
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void OnDestroy()
