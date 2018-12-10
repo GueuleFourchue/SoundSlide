@@ -539,7 +539,8 @@ public class ManagerMoveLanes : MonoBehaviour
             pauseGame = false;
             Time.timeScale = 1;
             au.volume = 0;
-            au.Play();
+            if(mvPlayer.timeAudio != 0)
+                au.Play();
             au.DOFade(1, 0.5f);
         }
     }
