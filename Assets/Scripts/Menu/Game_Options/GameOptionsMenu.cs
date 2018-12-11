@@ -427,7 +427,7 @@ public class GameOptionsMenu : MonoBehaviour
                 //QuitGame
                 avatarMenu.enabled = false;
                 quitGame.SetActive(true);
-                quitGame.GetComponent<CanvasGroup>().DOFade(1, 0.35f);
+                InputsManager.IM.EnableCanvasGroup(quitGame.GetComponent<CanvasGroup>(), 0.35f);
                 quitGameOn = true;
                 isOnMainMenu = false;
                 EventSystem.current.SetSelectedGameObject(yesQuit.gameObject);
