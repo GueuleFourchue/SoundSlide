@@ -63,7 +63,7 @@ public class ManagerMovePlayer : MonoBehaviour
     private Vector3 scaleplayer;
 
     private float MoveFinal;
-    private float timeAudio = 0;
+    public float timeAudio = 0;
     private float originFOV;
 
     private bool flawless = false;
