@@ -30,6 +30,9 @@ public class ManagerMovePlayer : MonoBehaviour
     [Header("Anim")]
     public Animator anim;
 
+    [Header("Speed FX")]
+    public ParticleSystem speedFX;
+
     [Header("Player")]
     public Material mSpeed;
     public Transform avatarMesh;
@@ -37,6 +40,7 @@ public class ManagerMovePlayer : MonoBehaviour
     public SfxMenuInGame sfxScript;
 
     [Header("Audio Offset")]
+    public float offsetMaster = 0;
     public float offset75;
     public float offset100;
     public float offset125;
@@ -59,7 +63,7 @@ public class ManagerMovePlayer : MonoBehaviour
     private Vector3 scaleplayer;
 
     private float MoveFinal;
-    private float timeAudio = 0;
+    public float timeAudio = 0;
     private float originFOV;
 
     private bool flawless = false;
@@ -72,6 +76,7 @@ public class ManagerMovePlayer : MonoBehaviour
 
     private float offsetAudio;
     private float speedAudio = 1;
+    private float particlesAnimDuration = 0.5f;
 
     void Start()
     {
@@ -82,6 +87,11 @@ public class ManagerMovePlayer : MonoBehaviour
         scaleplayer = transform.localScale;
         TriCheckPoint();
         savelANE = checkpointLane[0];
+
+        mSpeed.SetFloat("_Scale", 0f);
+
+        if (speedFX != null)
+            speedFX.Stop();
 
         UnitByTimeOffset();
     }
@@ -152,17 +162,20 @@ public class ManagerMovePlayer : MonoBehaviour
     {
         float elapsedTime = 0;
         float startingPos = playerMove.transform.position.z;
+
         while (elapsedTime < seconds)
         {
+
             Vector3 newPosition = transform.position;
             newPosition.z = Mathf.Lerp(startingPos, posFinal.z, (elapsedTime / seconds));
 
             playerMove.transform.position = newPosition;
 
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.fixedDeltaTime;
 
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
+
         playerMove.transform.position = new Vector3(transform.position.x, transform.position.y, posFinal.z);
 
         mScore.SaveBestScore();
@@ -229,11 +242,16 @@ public class ManagerMovePlayer : MonoBehaviour
 
         MoveFinal = caracLevel.unitByT * (caracLevel.bpmValue / 60) * value;
 
-        co = StartCoroutine(MoveDuringMusic(transform.gameObject, new Vector3(transform.position.x, transform.position.y, MoveFinal), tempsrestant));
-        mmLanes.SwitchDeath();
-        mSpeed.SetFloat("_Scale", 0.05f);
-        mSpeed.SetFloat("_Speed", 0.5f);
+        if (transform.gameObject.activeSelf)
+            co = StartCoroutine(MoveDuringMusic(transform.gameObject, new Vector3(transform.position.x, transform.position.y, MoveFinal), tempsrestant));
 
+        mmLanes.SwitchDeath();
+
+        mSpeed.SetFloat("_Speed", 0.5f);
+        mSpeed.DOFloat(0.05f, "_Scale", particlesAnimDuration);
+
+        if (speedFX != null)
+            speedFX.Play();
     }
 
     public void PlaySound()
@@ -243,7 +261,10 @@ public class ManagerMovePlayer : MonoBehaviour
 
         //To Fix the offset problem in the audio after checkpoint
         //timeAudio = transform.position.z / (10 * (caracLevel.bpmValue / 60));
-        timeAudio = (transform.position.z / (10 * (caracLevel.bpmValue / 60))) - offsetAudio;
+        timeAudio = (transform.position.z / (10 * (caracLevel.bpmValue / 60))) - (offsetAudio + offsetMaster);
+
+        if (timeAudio < 0)
+            timeAudio = 0;
 
         au.time = timeAudio;
         au.pitch = 1;
@@ -263,10 +284,14 @@ public class ManagerMovePlayer : MonoBehaviour
 
         if (transform.position.z == 0)
         {
-            yield return new WaitForSeconds(offsetAudio);
+            yield return new WaitForSecondsRealtime(offsetAudio);
         }
-        timeAudio = (transform.position.z / (10 * (caracLevel.bpmValue / 60))) - offsetAudio;
-        
+
+        timeAudio = (transform.position.z / (10 * (caracLevel.bpmValue / 60))) - (offsetAudio + offsetMaster);
+
+        if (timeAudio < 0)
+            timeAudio = 0;
+
         au.time = timeAudio;
 
         //au.pitch = 1;
@@ -295,11 +320,16 @@ public class ManagerMovePlayer : MonoBehaviour
         Camera.main.DOShakePosition(0.2f, 0.7f, 30, 50);
         laneCam.DOShakePosition(0.2f, 0.7f, 30, 50);
 
+        mSpeed.DOFloat(0f, "_Scale", particlesAnimDuration);
+
+        if (speedFX != null)
+            speedFX.Stop();
+
         au.DOPitch(0.95f, 0.5f).OnComplete(() =>
             {
                 au.Stop();
                 au.pitch = 1;
-                mSpeed.SetFloat("_Scale", 0.01f);
+                // mSpeed.SetFloat("_Scale", 0.01f);
 
                 Camera.main.DOFieldOfView(originFOV, 1);
                 laneCam.DOFieldOfView(originFOV, 1);
@@ -343,7 +373,7 @@ public class ManagerMovePlayer : MonoBehaviour
                 offsetAudio = offset150;
                 speedAudio = speed150;
             }
-        }   
+        }
     }
 }
 

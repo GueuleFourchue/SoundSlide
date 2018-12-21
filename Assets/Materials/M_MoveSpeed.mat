@@ -25,7 +25,7 @@ Material:
     m_Floats:
     - _BounceRange: 24.22
     - _Height: 60
-    - _Scale: 0.01
+    - _Scale: 0
     - _Speed: 0.1
     - _Trail: 60
     m_Colors:

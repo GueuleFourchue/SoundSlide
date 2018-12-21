@@ -23,8 +23,9 @@ public class MenuScript : MonoBehaviour
 
     bool waitingForKey;
 
+    public bool inInputMenu = false;
 
-
+    private string previousText;
 
 
     void Start()
@@ -40,7 +41,7 @@ public class MenuScript : MonoBehaviour
         //menuPanel.gameObject.SetActive(false);
 
         waitingForKey = false;
-
+        inInputMenu = false;
 
 
         /*iterate through each child of the panel and check
@@ -83,16 +84,20 @@ public class MenuScript : MonoBehaviour
 
     public void DisplayInputsMenu()
     {
+        inInputMenu = true;
+
         baseOptionsCanvas.DOFade(0, 0.3f).OnComplete(() =>
         {
             baseOptionsCanvas.gameObject.SetActive(false);
             inputOptionsCanvas.gameObject.SetActive(true);
             inputOptionsCanvas.DOFade(1, 0.3f);
         });
-        
+
     }
     public void BackToBaseMenu()
     {
+        inInputMenu = false;
+
         inputOptionsCanvas.DOFade(0, 0.3f).OnComplete(() =>
         {
             inputOptionsCanvas.gameObject.SetActive(false);
@@ -172,8 +177,9 @@ public class MenuScript : MonoBehaviour
     //Used for controlling the flow of our below Coroutine
 
     IEnumerator WaitForKey()
-
     {
+        previousText = buttonText.text;
+
         buttonText.text = "...";
         while (!keyEvent.isKey)
 
@@ -205,7 +211,11 @@ public class MenuScript : MonoBehaviour
 
         yield return WaitForKey(); //Executes endlessly until user presses a key
 
-
+        if (newKey == KeyCode.Escape)
+        {
+            buttonText.text = previousText;
+            yield break;
+        }
 
         switch (keyName)
 
