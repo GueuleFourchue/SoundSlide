@@ -1,6 +1,7 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using DG.Tweening;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -120,7 +121,6 @@ public class ManagerMoveLanes : MonoBehaviour
 
         PPVolume.profile.TryGetSettings(out colorGradingLayer);
         originSaturation = colorGradingLayer.saturation.value;
-
     }
 
     void Awake()
@@ -506,6 +506,11 @@ public class ManagerMoveLanes : MonoBehaviour
         transform.DOLocalMoveX(lane.localPosition.x, 0.15f);
         transform.DORotate(new Vector3(0, 0, lane.transform.eulerAngles.z), 0.15f);
         transform.DOLocalMoveY(lane.localPosition.y, 0.15f);
+
+        if (SteamAchivements.instance != null && info_managerscript.instance != null)
+        {
+            SteamAchivements.instance.SetUnlockAchivements(SceneManager.GetActiveScene().name, info_managerscript.instance.info_normal, info_managerscript.instance.info_flawless, info_managerscript.instance.info_speed125, info_managerscript.instance.info_speed150, info_managerscript.instance.info_noNearLanes, info_managerscript.instance.info_noFarLanes);
+        }
     }
 
     public void Pause()

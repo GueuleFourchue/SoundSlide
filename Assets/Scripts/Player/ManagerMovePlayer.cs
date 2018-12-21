@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
+
 
 public class ManagerMovePlayer : MonoBehaviour
 {
@@ -180,6 +182,15 @@ public class ManagerMovePlayer : MonoBehaviour
 
         mScore.SaveBestScore();
         cvManager.NumberOfPlayerDie(nbPlayerDie);
+
+        ///
+        //SteamManager
+        ///
+        if(SteamAchivements.instance != null && info_managerscript.instance != null)
+        {
+            SteamAchivements.instance.SetUnlockAchivements(SceneManager.GetActiveScene().name, info_managerscript.instance.info_normal, info_managerscript.instance.info_flawless, info_managerscript.instance.info_speed125, info_managerscript.instance.info_speed150, info_managerscript.instance.info_noNearLanes, info_managerscript.instance.info_noFarLanes);
+        }
+
         endLevel.Activate();
         transform.DOMoveZ(transform.position.z + 100, 7);
 
@@ -307,6 +318,25 @@ public class ManagerMovePlayer : MonoBehaviour
         nbPlayerDie++;
         mScore.ReturnScoreDead();
 
+
+
+        ///
+        ///AchivementsSteam
+        ///
+        if (PlayerPrefs.GetInt("DeadNumber") < 100)
+        {
+            PlayerPrefs.SetInt("DeadNumber", PlayerPrefs.GetInt("DeadNumber") + 1);
+        }
+        else
+        {
+            if (SteamAchivements.instance != null)
+            {
+                SteamAchivements.instance.UnlockSteamAchivement("achivement_24");
+            }
+        }
+
+
+
         cvManager.actualCombo = 0;
         cvManager.UpgradeCombo();
 
@@ -344,30 +374,27 @@ public class ManagerMovePlayer : MonoBehaviour
 
     void UnitByTimeOffset()
     {
-        infoLevel = GameObject.Find("InfoLevel");
-        if (infoLevel != null)
+        if (info_managerscript.instance != null)
         {
-            levelInfomanager = infoLevel.GetComponent<info_managerscript>();
-
-            if (levelInfomanager.info_speed75)
+            if (info_managerscript.instance.info_speed75)
             {
                 //caracLevel.unitByT = unit75;
                 offsetAudio = offset75;
                 speedAudio = speed75;
             }
-            if (levelInfomanager.info_speed100)
+            if (info_managerscript.instance.info_speed100)
             {
                 //caracLevel.unitByT = unit100;
                 offsetAudio = offset100;
                 speedAudio = speed100;
             }
-            if (levelInfomanager.info_speed125)
+            if (info_managerscript.instance.info_speed125)
             {
                 //caracLevel.unitByT = unit125;
                 offsetAudio = offset125;
                 speedAudio = speed125;
             }
-            if (levelInfomanager.info_speed150)
+            if (info_managerscript.instance.info_speed150)
             {
                 //caracLevel.unitByT = unit150;
                 offsetAudio = offset150;

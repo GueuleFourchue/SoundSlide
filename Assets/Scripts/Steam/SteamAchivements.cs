@@ -25,13 +25,14 @@ public class SteamAchivements : MonoBehaviour {
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.N))
         {
-            UnlockSteamAchivement("achivement_24");
+            UnlockSteamAchivement("achivement_00");
         }
     }
     public void UnlockSteamAchivement(string ID)
     {
+        SteamUserStats.ClearAchievement(ID);
         TestSteamAchivement(ID);
         Debug.Log(unlockTest);
         if (!unlockTest)
@@ -42,7 +43,7 @@ public class SteamAchivements : MonoBehaviour {
         }
     }
 
-    public void ReceiveInfoLevel(string nameLevel, bool normal, bool flawless, bool speed125, bool speed150, bool NoNear, bool NoFar)
+    public void SetUnlockAchivements(string nameLevel, bool normal, bool flawless, bool speed125, bool speed150, bool NoNear, bool NoFar)
     {
         string numAchivement = "00";
 

@@ -85,7 +85,10 @@ public class TutoManager : MonoBehaviour {
         CheckDisplayedText();
 
         if (endTutoText && Input.GetKeyDown(KeyCode.Space))
+        {
+            if(SteamAchivements.instance != null)SteamAchivements.instance.UnlockSteamAchivement("achivement_24");
             StartCoroutine(EndTutoText());
+        }
 
         if (end && Input.GetKeyDown(KeyCode.Space))
             StartCoroutine(ChangeScene());
