@@ -23,11 +23,20 @@ public class SteamAchivements : MonoBehaviour {
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            UnlockSteamAchivement("achivement_24");
+        }
+    }
     public void UnlockSteamAchivement(string ID)
     {
         TestSteamAchivement(ID);
+        Debug.Log(unlockTest);
         if (!unlockTest)
         {
+            Debug.Log("enter");
             SteamUserStats.SetAchievement(ID);
             SteamUserStats.StoreStats();
         }
@@ -42,15 +51,12 @@ public class SteamAchivements : MonoBehaviour {
             if (normal)
             {
                 numAchivement = "00"; UnlockSteamAchivement("achivement_" + numAchivement);
-                if (speed125)
-                {
-                    numAchivement = "02"; UnlockSteamAchivement("achivement_" + numAchivement);
-                    if (speed150) { numAchivement = "03"; UnlockSteamAchivement("achivement_" + numAchivement); }
-                    if (NoNear) { numAchivement = "04"; UnlockSteamAchivement("achivement_" + numAchivement); }
-                    if (NoFar) { numAchivement = "05"; UnlockSteamAchivement("achivement_" + numAchivement); }
-                }
-                else if (flawless) { numAchivement = "01"; UnlockSteamAchivement("achivement_" + numAchivement); }
+                if (speed125){numAchivement = "02"; UnlockSteamAchivement("achivement_" + numAchivement); }
+                if (speed150) { numAchivement = "03"; UnlockSteamAchivement("achivement_" + numAchivement); }
+                if (NoNear) { numAchivement = "04"; UnlockSteamAchivement("achivement_" + numAchivement); }
+                if (NoFar) { numAchivement = "05"; UnlockSteamAchivement("achivement_" + numAchivement); }
             }
+            else if (flawless) { numAchivement = "01"; UnlockSteamAchivement("achivement_" + numAchivement); }
         }
         else if (nameLevel == "LEVEL_BRAZIL")
         {
@@ -91,10 +97,11 @@ public class SteamAchivements : MonoBehaviour {
             else if (flawless) { numAchivement = "19"; UnlockSteamAchivement("achivement_" + numAchivement); }
 
         }
-        ///Complete Full Hard Level
+
+        ///Complete 1 level 150% Flawless NoFarLanes & NoNearLanes
         else if (flawless && speed150 && NoNear && NoFar)
         {
-            UnlockSteamAchivement("achivement_31");
+            UnlockSteamAchivement("achivement_32");
         }
 
             CompleteAllLevel();
@@ -104,13 +111,28 @@ public class SteamAchivements : MonoBehaviour {
             CompleteAll150();
     }
 
+    void CompleteTuto()
+    {
+        UnlockSteamAchivement("achivement_24");
+    }
+
+    void CompleteLanesCrossed()
+    {
+        UnlockSteamAchivement("achivement_25");
+    }
+
+    void CompleteDeaths()
+    {
+        UnlockSteamAchivement("achivement_26");
+    }
+
     ///Complete all level in normal mode
     void CompleteAllLevel()
     {
-        bool successLvlEgypt = true;
-        bool successLvlBrazil = true;
-        bool successLvlIndia = true;
-        bool successLvlChina = true;
+        bool successLvlEgypt = false;
+        bool successLvlBrazil = false;
+        bool successLvlIndia = false;
+        bool successLvlChina = false;
         SteamUserStats.GetAchievement("achivement_00", out successLvlEgypt);
         SteamUserStats.GetAchievement("achivement_06", out successLvlBrazil);
         SteamUserStats.GetAchievement("achivement_12", out successLvlIndia);
@@ -118,17 +140,17 @@ public class SteamAchivements : MonoBehaviour {
       
         if(successLvlEgypt && successLvlBrazil && successLvlIndia && successLvlChina)
         {
-            UnlockSteamAchivement("achivement_26");
+            UnlockSteamAchivement("achivement_27");
         } 
     }
 
     ///Complete all level in no near mode
     void CompleteAllNoNearLanes()
     {
-        bool successLvlEgypt = true;
-        bool successLvlBrazil = true;
-        bool successLvlIndia = true;
-        bool successLvlChina = true;
+        bool successLvlEgypt = false;
+        bool successLvlBrazil = false;
+        bool successLvlIndia = false;
+        bool successLvlChina = false;
         SteamUserStats.GetAchievement("achivement_04", out successLvlEgypt);
         SteamUserStats.GetAchievement("achivement_10", out successLvlBrazil);
         SteamUserStats.GetAchievement("achivement_16", out successLvlIndia);
@@ -136,17 +158,17 @@ public class SteamAchivements : MonoBehaviour {
 
         if (successLvlEgypt && successLvlBrazil && successLvlIndia && successLvlChina)
         {
-            UnlockSteamAchivement("achivement_27");
+            UnlockSteamAchivement("achivement_28");
         }
     }
 
     ///Complete all level in no far mode
     void CompleteAllNoFarLanes()
     {
-        bool successLvlEgypt = true;
-        bool successLvlBrazil = true;
-        bool successLvlIndia = true;
-        bool successLvlChina = true;
+        bool successLvlEgypt = false;
+        bool successLvlBrazil = false;
+        bool successLvlIndia = false;
+        bool successLvlChina = false;
         SteamUserStats.GetAchievement("achivement_05", out successLvlEgypt);
         SteamUserStats.GetAchievement("achivement_11", out successLvlBrazil);
         SteamUserStats.GetAchievement("achivement_17", out successLvlIndia);
@@ -154,17 +176,17 @@ public class SteamAchivements : MonoBehaviour {
 
         if (successLvlEgypt && successLvlBrazil && successLvlIndia && successLvlChina)
         {
-            UnlockSteamAchivement("achivement_28");
+            UnlockSteamAchivement("achivement_29");
         }
     }
 
     ///Complete all level in 125 mode
     void CompleteAll125()
     {
-        bool successLvlEgypt = true;
-        bool successLvlBrazil = true;
-        bool successLvlIndia = true;
-        bool successLvlChina = true;
+        bool successLvlEgypt = false;
+        bool successLvlBrazil = false;
+        bool successLvlIndia = false;
+        bool successLvlChina = false;
         SteamUserStats.GetAchievement("achivement_02", out successLvlEgypt);
         SteamUserStats.GetAchievement("achivement_08", out successLvlBrazil);
         SteamUserStats.GetAchievement("achivement_14", out successLvlIndia);
@@ -172,17 +194,17 @@ public class SteamAchivements : MonoBehaviour {
 
         if (successLvlEgypt && successLvlBrazil && successLvlIndia && successLvlChina)
         {
-            UnlockSteamAchivement("achivement_29");
+            UnlockSteamAchivement("achivement_30");
         }
     }
 
     ///Complete all level in 150 mode
     void CompleteAll150()
     {
-        bool successLvlEgypt = true;
-        bool successLvlBrazil = true;
-        bool successLvlIndia = true;
-        bool successLvlChina = true;
+        bool successLvlEgypt = false;
+        bool successLvlBrazil = false;
+        bool successLvlIndia = false;
+        bool successLvlChina = false;
         SteamUserStats.GetAchievement("achivement_03", out successLvlEgypt);
         SteamUserStats.GetAchievement("achivement_09", out successLvlBrazil);
         SteamUserStats.GetAchievement("achivement_15", out successLvlIndia);
@@ -190,7 +212,7 @@ public class SteamAchivements : MonoBehaviour {
 
         if (successLvlEgypt && successLvlBrazil && successLvlIndia && successLvlChina)
         {
-            UnlockSteamAchivement("achivement_30");
+            UnlockSteamAchivement("achivement_31");
         }
     }
 
