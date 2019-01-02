@@ -51,3 +51,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d7b2cd9d9b0ce40b8086f432e32a51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugMode: 1
+  Achievements: []
