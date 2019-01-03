@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 using DG.Tweening;
-
+using UnityEngine.SceneManagement;
 
 
 public class MenuScript : MonoBehaviour
@@ -24,7 +24,7 @@ public class MenuScript : MonoBehaviour
     bool waitingForKey;
 
     public bool inInputMenu = false;
-
+    public Image globalBlackFade;
     private string previousText;
 
 
@@ -267,4 +267,15 @@ public class MenuScript : MonoBehaviour
 
     }
 
+    public void LoadTutorial()
+    {
+        StartCoroutine(LoadTutoRoutine());
+    }
+    IEnumerator LoadTutoRoutine()
+    {
+        globalBlackFade.gameObject.SetActive(true);
+        globalBlackFade.DOFade(1, 1);
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene("TUTO");
+    }
 }
