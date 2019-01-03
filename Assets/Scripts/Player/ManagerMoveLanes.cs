@@ -507,9 +507,16 @@ public class ManagerMoveLanes : MonoBehaviour
         transform.DORotate(new Vector3(0, 0, lane.transform.eulerAngles.z), 0.15f);
         transform.DOLocalMoveY(lane.localPosition.y, 0.15f);
 
-        if (SteamAchivements.instance != null && info_managerscript.instance != null)
+        if (PlayerPrefs.GetInt("LanesSwapped") < 1000)
         {
-            SteamAchivements.instance.SetUnlockAchivements(SceneManager.GetActiveScene().name, info_managerscript.instance.info_normal, info_managerscript.instance.info_flawless, info_managerscript.instance.info_speed125, info_managerscript.instance.info_speed150, info_managerscript.instance.info_noNearLanes, info_managerscript.instance.info_noFarLanes);
+            PlayerPrefs.SetInt("LanesSwapped", PlayerPrefs.GetInt("LanesSwapped") + 1);
+        }
+        else
+        {
+            if (SteamAchivements.instance != null)
+            {
+                SteamAchivements.instance.CompleteLanesCrossed();
+            }
         }
     }
 

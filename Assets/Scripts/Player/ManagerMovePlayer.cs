@@ -182,10 +182,7 @@ public class ManagerMovePlayer : MonoBehaviour
 
         mScore.SaveBestScore();
         cvManager.NumberOfPlayerDie(nbPlayerDie);
-
-        ///
-        //SteamManager
-        ///
+        
         if(SteamAchivements.instance != null && info_managerscript.instance != null)
         {
             SteamAchivements.instance.SetUnlockAchivements(SceneManager.GetActiveScene().name, info_managerscript.instance.info_normal, info_managerscript.instance.info_flawless, info_managerscript.instance.info_speed125, info_managerscript.instance.info_speed150, info_managerscript.instance.info_noNearLanes, info_managerscript.instance.info_noFarLanes);
@@ -318,24 +315,22 @@ public class ManagerMovePlayer : MonoBehaviour
         nbPlayerDie++;
         mScore.ReturnScoreDead();
 
-
-
         ///
         ///AchivementsSteam
         ///
+
         if (PlayerPrefs.GetInt("DeadNumber") < 100)
         {
             PlayerPrefs.SetInt("DeadNumber", PlayerPrefs.GetInt("DeadNumber") + 1);
+            Debug.Log(PlayerPrefs.GetInt("DeadNumber"));
         }
         else
         {
             if (SteamAchivements.instance != null)
             {
-                SteamAchivements.instance.UnlockSteamAchivement("achivement_24");
+                SteamAchivements.instance.CompleteDeaths();
             }
         }
-
-
 
         cvManager.actualCombo = 0;
         cvManager.UpgradeCombo();

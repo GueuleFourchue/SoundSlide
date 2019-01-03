@@ -291,7 +291,7 @@ public class SteamAchivements : MonoBehaviour
         }
 
         ///Complete 1 level 150% Flawless NoFarLanes & NoNearLanes
-        else if (flawless && speed150 && NoNear && NoFar)
+        if (flawless && speed150 && NoNear && NoFar)
         {
             UnlockAchievement("achivement_32");
         }
@@ -309,12 +309,12 @@ public class SteamAchivements : MonoBehaviour
         UnlockAchievement("achivement_24");
     }
 
-    void CompleteLanesCrossed()
+    public void CompleteLanesCrossed()
     {
         UnlockAchievement("achivement_25");
     }
 
-    void CompleteDeaths()
+    public void CompleteDeaths()
     {
         UnlockAchievement("achivement_26");
     }
@@ -351,7 +351,7 @@ public class SteamAchivements : MonoBehaviour
 
         if (successLvlEgypt && successLvlBrazil && successLvlIndia && successLvlChina)
         {
-            UnlockAchievement("achivement_28");
+            UnlockAchievement("achivement_31");
         }
     }
 
@@ -369,7 +369,7 @@ public class SteamAchivements : MonoBehaviour
 
         if (successLvlEgypt && successLvlBrazil && successLvlIndia && successLvlChina)
         {
-            UnlockAchievement("achivement_29");
+            UnlockAchievement("achivement_30");
         }
     }
 
@@ -387,7 +387,7 @@ public class SteamAchivements : MonoBehaviour
 
         if (successLvlEgypt && successLvlBrazil && successLvlIndia && successLvlChina)
         {
-            UnlockAchievement("achivement_30");
+            UnlockAchievement("achivement_28");
         }
     }
 
@@ -405,7 +405,7 @@ public class SteamAchivements : MonoBehaviour
 
         if (successLvlEgypt && successLvlBrazil && successLvlIndia && successLvlChina)
         {
-            UnlockAchievement("achivement_31");
+            UnlockAchievement("achivement_29");
         }
     }
 
