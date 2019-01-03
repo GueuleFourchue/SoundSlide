@@ -180,14 +180,6 @@ public class SteamAchivements : MonoBehaviour
     }
     #endregion
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            UnlockAchievement("achivement_00");
-        }
-    }
-
     public void UnlockSteamAchivement(string ID)
     {
         SteamUserStats.ClearAchievement(ID);
@@ -312,7 +304,7 @@ public class SteamAchivements : MonoBehaviour
     }
 
     #region SoundSlide
-    void CompleteTuto()
+     public void CompleteTuto()
     {
         UnlockAchievement("achivement_24");
     }

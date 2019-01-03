@@ -86,12 +86,18 @@ public class TutoManager : MonoBehaviour {
 
         if (endTutoText && Input.GetKeyDown(KeyCode.Space))
         {
-            if(SteamAchivements.instance != null)SteamAchivements.instance.UnlockSteamAchivement("achivement_24");
             StartCoroutine(EndTutoText());
         }
 
         if (end && Input.GetKeyDown(KeyCode.Space))
+        {
+            if (SteamAchivements.instance != null)
+            {
+                SteamAchivements.instance.CompleteTuto();
+            }
             StartCoroutine(ChangeScene());
+
+        }
     }
 
     void CheckPosition()
