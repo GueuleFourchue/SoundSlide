@@ -250,7 +250,7 @@ public class ManagerMovePlayer : MonoBehaviour
         au.pitch = 1;
         au.volume = 0;
         au.time = timeAudio;
-        au.Play();
+        au.PlayScheduled(AudioSettings.dspTime);
         au.DOFade(1, 1f);
     }
 

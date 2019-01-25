@@ -552,7 +552,7 @@ public class ManagerMoveLanes : MonoBehaviour
             Time.timeScale = 1;
             au.volume = 0;
             if(mvPlayer.timeAudio != 0)
-                au.Play();
+            au.PlayScheduled(AudioSettings.dspTime);
             au.DOFade(1, 0.5f);
         }
     }
