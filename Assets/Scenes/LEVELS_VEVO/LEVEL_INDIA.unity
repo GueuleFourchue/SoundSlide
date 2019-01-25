@@ -4631,15 +4631,7 @@ MonoBehaviour:
   avatarMesh: {fileID: 1261212545}
   laneCam: {fileID: 472136113}
   sfxScript: {fileID: 1325472250}
-  offsetMaster: 0
-  offset75: 0
-  offset100: 0
-  offset125: -0.03
-  offset150: -0.05
-  speed75: 1
-  speed100: 1.0005
-  speed125: 1.0005
-  speed150: 1.0005
+  timeAudio: 0
 --- !u!114 &570689507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10309,7 +10301,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4315903344355434, guid: 4c681a13f22ed4e7f9d455807a24164c, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4315903344355434, guid: 4c681a13f22ed4e7f9d455807a24164c, type: 2}
       propertyPath: m_LocalRotation.x

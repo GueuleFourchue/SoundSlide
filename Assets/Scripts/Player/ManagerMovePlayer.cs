@@ -12,6 +12,7 @@ public class ManagerMovePlayer : MonoBehaviour
     public LevelUp caracLevel;
 
     [Header("Debut de lane")]
+    private float LevelOffset = 3.4f;
     public float decalageLane = 3;
 
     [Header("CheckPoint")]
@@ -143,11 +144,12 @@ public class ManagerMovePlayer : MonoBehaviour
 
     void EndGame(float EndPosition)
     {
+
         transform.position = new Vector3(transform.position.x, transform.position.y, EndPosition);
 
         mScore.SaveBestScore();
         cvManager.NumberOfPlayerDie(nbPlayerDie);
-
+        
         if (SteamAchivements.instance != null && info_managerscript.instance != null)
         {
             SteamAchivements.instance.SetUnlockAchivements(SceneManager.GetActiveScene().name, info_managerscript.instance.info_normal, info_managerscript.instance.info_flawless, info_managerscript.instance.info_speed125, info_managerscript.instance.info_speed150, info_managerscript.instance.info_noNearLanes, info_managerscript.instance.info_noFarLanes);
@@ -328,7 +330,7 @@ public class ManagerMovePlayer : MonoBehaviour
 
     public void PlaySound()
     {
-        timeAudio = transform.position.z / (caracLevel.unitByT * (caracLevel.bpmValue / 60));
+        timeAudio = (transform.position.z + (caracLevel.bpmValue * 0.1f) / LevelOffset ) / (caracLevel.unitByT * (caracLevel.bpmValue / 60));
 
         au.pitch = 1;
         au.volume = 0;

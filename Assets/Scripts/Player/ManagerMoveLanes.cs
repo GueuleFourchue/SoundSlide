@@ -170,6 +170,7 @@ public class ManagerMoveLanes : MonoBehaviour
                 scoreChanger += -0.3f;
                 mvPlayer.caracLevel.bpmValue *= 0.75f;
                 au.clip = Mus_75;
+                info_managerscript.instance.SetSpeedValue(1.25f);
                 //LD.position = new Vector3(LD.position.x, LD.position.y, speed75Offset);
             }
             if (levelInfomanager.info_speed100)
@@ -177,6 +178,7 @@ public class ManagerMoveLanes : MonoBehaviour
                 scoreChanger += 0;
                 mvPlayer.caracLevel.bpmValue *= 1f;
                 au.clip = Mus_100;
+                info_managerscript.instance.SetSpeedValue(1.0f);
                 //LD.position = new Vector3(LD.position.x, LD.position.y, speed100Offset);
             }
             if (levelInfomanager.info_speed125)
@@ -184,6 +186,7 @@ public class ManagerMoveLanes : MonoBehaviour
                 scoreChanger += 0.3f;
                 mvPlayer.caracLevel.bpmValue *= 1.25f;
                 au.clip = Mus_125;
+                info_managerscript.instance.SetSpeedValue(0.75f);
                 //LD.position = new Vector3(LD.position.x, LD.position.y, speed125Offset);
             }
             if (levelInfomanager.info_speed150)
@@ -191,6 +194,7 @@ public class ManagerMoveLanes : MonoBehaviour
                 scoreChanger += 0.6f;
                 mvPlayer.caracLevel.bpmValue *= 1.5f;
                 au.clip = Mus_150;
+                info_managerscript.instance.SetSpeedValue(0.5f);
                 //LD.position = new Vector3(LD.position.x, LD.position.y, speed150Offset);
             }
             if (levelInfomanager.info_noNearLanes && !levelInfomanager.info_noFarLanes)
@@ -503,12 +507,11 @@ public class ManagerMoveLanes : MonoBehaviour
 
     void MoveLane(Transform lane)
     {
-        //transform.DOLocalMoveX(lane.localPosition.x, 0.15f);
+        transform.DOLocalMoveX(lane.localPosition.x, 0.15f * info_managerscript.instance.GetSpeedValue());
         transform.DORotate(new Vector3(0, 0, lane.transform.eulerAngles.z), 0.05f);
-        //transform.DOLocalMoveY(lane.localPosition.y, 0.15f);
+        transform.DOLocalMoveY(lane.localPosition.y, 0.15f * info_managerscript.instance.GetSpeedValue());
 
-        transform.position = new Vector3(lane.localPosition.x, lane.localPosition.y, transform.position.z);
-        //transform.Rotate(new Vector3(0, 0, lane.transform.eulerAngles.z));
+        //transform.position = new Vector3(lane.localPosition.x, lane.localPosition.y, transform.position.z);
 
         if (PlayerPrefs.GetInt("LanesSwapped") < 1000)
         {

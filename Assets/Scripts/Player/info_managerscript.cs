@@ -15,6 +15,7 @@ public class info_managerscript : MonoBehaviour {
 	public bool info_speed150;
 	public bool info_noFarLanes;
 	public bool info_noNearLanes;
+    private float _speedValue = 1.0f;
 
 	void Awake() {
 		
@@ -40,4 +41,14 @@ public class info_managerscript : MonoBehaviour {
 		info_noFarLanes = noFarLanes;
 		info_noNearLanes = noNearLanes;
 	}
+
+    public float GetSpeedValue()
+    {
+        return _speedValue;
+    }
+
+    public void SetSpeedValue(float value)
+    {
+        _speedValue = value;
+    }
 }
