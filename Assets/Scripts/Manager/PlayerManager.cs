@@ -14,7 +14,6 @@ public class PlayerManager : MonoBehaviour
             return;
 
         mmPlayer.PlayGame();
-        //mmPlayer.PlaySound();
-        mmPlayer.StartCoroutine("PlaySoundRoutine");
+        mmPlayer.PlaySound();
     }
 }

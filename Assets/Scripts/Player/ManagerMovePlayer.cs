@@ -41,21 +41,6 @@ public class ManagerMovePlayer : MonoBehaviour
     public Camera laneCam;
     public SfxMenuInGame sfxScript;
 
-    [Header("Audio Offset")]
-    public float offsetMaster = 0;
-    public float offset75;
-    public float offset100;
-    public float offset125;
-    public float offset150;
-    //public float unit75;
-    //public float unit100;
-    //public float unit125;
-    //public float unit150;
-    public float speed75;
-    public float speed100;
-    public float speed125;
-    public float speed150;
-
     private Coroutine co;
     private Coroutine codead;
     private AudioSource au;
@@ -76,8 +61,6 @@ public class ManagerMovePlayer : MonoBehaviour
     private GameObject infoLevel;
     private info_managerscript levelInfomanager;
 
-    private float offsetAudio;
-    private float speedAudio = 1;
     private float particlesAnimDuration = 0.5f;
 
     void Start()
@@ -94,8 +77,6 @@ public class ManagerMovePlayer : MonoBehaviour
 
         if (speedFX != null)
             speedFX.Stop();
-
-        UnitByTimeOffset();
     }
 
     void Update()
@@ -264,48 +245,11 @@ public class ManagerMovePlayer : MonoBehaviour
 
     public void PlaySound()
     {
-        timeAudio = 0;
-        //timeAudio = transform.position.z / (caracLevel.unitByT * (caracLevel.bpmValue / 60));
+        timeAudio = transform.position.z / (caracLevel.unitByT * (caracLevel.bpmValue / 60));
 
-        //To Fix the offset problem in the audio after checkpoint
-        //timeAudio = transform.position.z / (10 * (caracLevel.bpmValue / 60));
-        timeAudio = (transform.position.z / (10 * (caracLevel.bpmValue / 60))) - (offsetAudio + offsetMaster);
-
-        if (timeAudio < 0)
-            timeAudio = 0;
-
-        au.time = timeAudio;
         au.pitch = 1;
-
         au.volume = 0;
-        au.Play();
-        au.DOFade(1, 1f);
-    }
-
-    public IEnumerator PlaySoundRoutine()
-    {
-        timeAudio = 0;
-        //timeAudio = transform.position.z / (caracLevel.unitByT * (caracLevel.bpmValue / 60));
-
-        //To Fix the offset problem in the audio after checkpoint
-        //timeAudio = transform.position.z / (10 * (caracLevel.bpmValue / 60));
-
-        if (transform.position.z == 0)
-        {
-            yield return new WaitForSecondsRealtime(offsetAudio);
-        }
-
-        timeAudio = (transform.position.z / (10 * (caracLevel.bpmValue / 60))) - (offsetAudio + offsetMaster);
-
-        if (timeAudio < 0)
-            timeAudio = 0;
-
         au.time = timeAudio;
-
-        //au.pitch = 1;
-        au.pitch = speedAudio;
-
-        au.volume = 0;
         au.Play();
         au.DOFade(1, 1f);
     }
@@ -322,7 +266,6 @@ public class ManagerMovePlayer : MonoBehaviour
         if (PlayerPrefs.GetInt("DeadNumber") < 100)
         {
             PlayerPrefs.SetInt("DeadNumber", PlayerPrefs.GetInt("DeadNumber") + 1);
-            Debug.Log(PlayerPrefs.GetInt("DeadNumber"));
         }
         else
         {
@@ -365,37 +308,6 @@ public class ManagerMovePlayer : MonoBehaviour
             });
 
         anim.Play("Death");
-    }
-
-    void UnitByTimeOffset()
-    {
-        if (info_managerscript.instance != null)
-        {
-            if (info_managerscript.instance.info_speed75)
-            {
-                //caracLevel.unitByT = unit75;
-                offsetAudio = offset75;
-                speedAudio = speed75;
-            }
-            if (info_managerscript.instance.info_speed100)
-            {
-                //caracLevel.unitByT = unit100;
-                offsetAudio = offset100;
-                speedAudio = speed100;
-            }
-            if (info_managerscript.instance.info_speed125)
-            {
-                //caracLevel.unitByT = unit125;
-                offsetAudio = offset125;
-                speedAudio = speed125;
-            }
-            if (info_managerscript.instance.info_speed150)
-            {
-                //caracLevel.unitByT = unit150;
-                offsetAudio = offset150;
-                speedAudio = speed150;
-            }
-        }
     }
 }
 
