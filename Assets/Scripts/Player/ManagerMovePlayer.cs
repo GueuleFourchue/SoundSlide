@@ -63,6 +63,20 @@ public class ManagerMovePlayer : MonoBehaviour
 
     private float particlesAnimDuration = 0.5f;
 
+    //Variables from new CharacterMovement implementation
+    private float _StartPosition;
+    private float _EndPosition;
+    private float _ElapsedTime;
+    private float _RemainingTimeAtRespawn;
+
+    private float _Speed;
+    private float _TrackWorldLength;
+    private float _TotalTime;
+    private float _ElapsedTimeSinceStart;
+    private float _RemainingTime;
+
+    private bool _IsMoving;
+
     void Start()
     {
         mmLanes = transform.GetComponent<ManagerMoveLanes>();
@@ -79,13 +93,105 @@ public class ManagerMovePlayer : MonoBehaviour
             speedFX.Stop();
     }
 
+
     void Update()
     {
         if ((Input.GetKey(KeyCode.Space) && mmLanes.test() && !restartFast))
         {
             restartFast = true;
         }
+
+        if (_IsMoving)
+        {
+            if(_ElapsedTime < _RemainingTime)
+            {
+
+                MoveCharacter(_EndPosition, _ElapsedTime / _RemainingTime);
+                _ElapsedTime += Time.deltaTime;
+            }
+            else
+            {
+                _IsMoving = false;
+                EndGame(_EndPosition);
+            }
+        }
     }
+
+    void Respawn()
+    {
+        _ElapsedTime = 0f;
+        _StartPosition = transform.position.z;
+
+        _Speed = caracLevel.unitByT * (caracLevel.bpmValue / 60f);
+        _TrackWorldLength = (caracLevel.nbTime * caracLevel.unitByT);
+
+        _TotalTime = _TrackWorldLength / _Speed;
+        _ElapsedTimeSinceStart = savelANE.transform.position.z / _Speed;
+        _RemainingTime = _TotalTime - _ElapsedTimeSinceStart;
+
+        _EndPosition = _Speed * _TotalTime;
+        _IsMoving = true;
+    }
+
+    void MoveCharacter(float EndPosition, float CurrentTime)
+    {
+        Vector3 newPosition = transform.position;
+        //newPosition.z = Mathf.Lerp(_StartPosition, EndPosition, CurrentTime);
+        newPosition.z += (caracLevel.bpmValue / 60f) * caracLevel.unitByT * Time.deltaTime;
+        transform.position = newPosition;
+    }
+
+    void EndGame(float EndPosition)
+    {
+        transform.position = new Vector3(transform.position.x, transform.position.y, EndPosition);
+
+        mScore.SaveBestScore();
+        cvManager.NumberOfPlayerDie(nbPlayerDie);
+
+        if (SteamAchivements.instance != null && info_managerscript.instance != null)
+        {
+            SteamAchivements.instance.SetUnlockAchivements(SceneManager.GetActiveScene().name, info_managerscript.instance.info_normal, info_managerscript.instance.info_flawless, info_managerscript.instance.info_speed125, info_managerscript.instance.info_speed150, info_managerscript.instance.info_noNearLanes, info_managerscript.instance.info_noFarLanes);
+        }
+
+        endLevel.Activate();
+        transform.DOMoveZ(transform.position.z + 100, 7);
+    }
+
+    /*
+    public IEnumerator MoveDuringMusic(GameObject playerMove, Vector3 posFinal, float seconds)
+    {
+        float elapsedTime = 0;
+        float startingPos = playerMove.transform.position.z;
+
+        while (elapsedTime < seconds)
+        {
+
+            Vector3 newPosition = transform.position;
+            newPosition.z = Mathf.Lerp(startingPos, posFinal.z, (elapsedTime / seconds));
+
+            playerMove.transform.position = newPosition;
+
+            elapsedTime += Time.fixedDeltaTime;
+
+            yield return new WaitForFixedUpdate();
+        }
+
+        ///Fin
+        playerMove.transform.position = new Vector3(transform.position.x, transform.position.y, posFinal.z);
+
+        mScore.SaveBestScore();
+        cvManager.NumberOfPlayerDie(nbPlayerDie);
+
+        if (SteamAchivements.instance != null && info_managerscript.instance != null)
+        {
+            SteamAchivements.instance.SetUnlockAchivements(SceneManager.GetActiveScene().name, info_managerscript.instance.info_normal, info_managerscript.instance.info_flawless, info_managerscript.instance.info_speed125, info_managerscript.instance.info_speed150, info_managerscript.instance.info_noNearLanes, info_managerscript.instance.info_noFarLanes);
+        }
+
+        endLevel.Activate();
+        transform.DOMoveZ(transform.position.z + 100, 7);
+
+        yield return null;
+    }*/
 
     public void TriCheckPoint()
     {
@@ -141,40 +247,6 @@ public class ManagerMovePlayer : MonoBehaviour
 
     }
 
-    public IEnumerator MoveDuringMusic(GameObject playerMove, Vector3 posFinal, float seconds)
-    {
-        float elapsedTime = 0;
-        float startingPos = playerMove.transform.position.z;
-
-        while (elapsedTime < seconds)
-        {
-
-            Vector3 newPosition = transform.position;
-            newPosition.z = Mathf.Lerp(startingPos, posFinal.z, (elapsedTime / seconds));
-
-            playerMove.transform.position = newPosition;
-
-            elapsedTime += Time.fixedDeltaTime;
-
-            yield return new WaitForFixedUpdate();
-        }
-
-        playerMove.transform.position = new Vector3(transform.position.x, transform.position.y, posFinal.z);
-
-        mScore.SaveBestScore();
-        cvManager.NumberOfPlayerDie(nbPlayerDie);
-        
-        if(SteamAchivements.instance != null && info_managerscript.instance != null)
-        {
-            SteamAchivements.instance.SetUnlockAchivements(SceneManager.GetActiveScene().name, info_managerscript.instance.info_normal, info_managerscript.instance.info_flawless, info_managerscript.instance.info_speed125, info_managerscript.instance.info_speed150, info_managerscript.instance.info_noNearLanes, info_managerscript.instance.info_noFarLanes);
-        }
-
-        endLevel.Activate();
-        transform.DOMoveZ(transform.position.z + 100, 7);
-
-        yield return null;
-    }
-
     public IEnumerator EffectDead(float seconds2, Transform lane)
     {
         mmLanes.ResetLives();
@@ -215,24 +287,35 @@ public class ManagerMovePlayer : MonoBehaviour
 
         transform.position = new Vector3(transform.position.x, transform.position.y, pos.z);
 
+
         mmLanes.actulane = savelANE;
         mmLanes.ResetMatCheckPoint();
 
         gmanager.DeadMoment();
+
         yield return null;
     }
 
     public void PlayGame()
     {
+        
         restartFast = false;
-        float value = (caracLevel.nbTime * caracLevel.unitByT) / ((caracLevel.unitByT * (caracLevel.bpmValue / 60)));
-        float tempsparcourut = savelANE.transform.position.z / (caracLevel.unitByT * (caracLevel.bpmValue / 60));
-        float tempsrestant = value - tempsparcourut;
+        Respawn();
 
-        MoveFinal = caracLevel.unitByT * (caracLevel.bpmValue / 60) * value;
+        /*
+        float Speed = caracLevel.unitByT * (caracLevel.bpmValue / 60f);
+        float TrackWorldLength = (caracLevel.nbTime * caracLevel.unitByT);
+
+        float TotalTime = TrackWorldLength / Speed;
+        float ElapsedTime = savelANE.transform.position.z / Speed;
+        float RemainingTime = TotalTime - ElapsedTime;
+
+        MoveFinal = Speed * TotalTime;
 
         if (transform.gameObject.activeSelf)
-            co = StartCoroutine(MoveDuringMusic(transform.gameObject, new Vector3(transform.position.x, transform.position.y, MoveFinal), tempsrestant));
+            co = StartCoroutine(MoveDuringMusic(transform.gameObject, new Vector3(transform.position.x, transform.position.y, MoveFinal), RemainingTime));
+        
+        */
 
         mmLanes.SwitchDeath();
 
@@ -281,7 +364,8 @@ public class ManagerMovePlayer : MonoBehaviour
         Camera.main.DOFieldOfView(originFOV + 40, 1);
         laneCam.DOFieldOfView(originFOV + 40, 1);
 
-        StopCoroutine(co);
+        _IsMoving = false;
+        //StopCoroutine(co);
 
         mSpeed.SetFloat("_Speed", 0.1f);
         au.DOFade(0, 0.5f);

@@ -503,9 +503,12 @@ public class ManagerMoveLanes : MonoBehaviour
 
     void MoveLane(Transform lane)
     {
-        transform.DOLocalMoveX(lane.localPosition.x, 0.15f);
-        transform.DORotate(new Vector3(0, 0, lane.transform.eulerAngles.z), 0.15f);
-        transform.DOLocalMoveY(lane.localPosition.y, 0.15f);
+        //transform.DOLocalMoveX(lane.localPosition.x, 0.15f);
+        transform.DORotate(new Vector3(0, 0, lane.transform.eulerAngles.z), 0.05f);
+        //transform.DOLocalMoveY(lane.localPosition.y, 0.15f);
+
+        transform.position = new Vector3(lane.localPosition.x, lane.localPosition.y, transform.position.z);
+        //transform.Rotate(new Vector3(0, 0, lane.transform.eulerAngles.z));
 
         if (PlayerPrefs.GetInt("LanesSwapped") < 1000)
         {
