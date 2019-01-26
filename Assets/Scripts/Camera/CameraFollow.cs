@@ -7,15 +7,8 @@ public class CameraFollow : MonoBehaviour
     public Transform cameraSpot;
     public Transform avatar;
 
-    public float moveLerp = 0.1f;
-    public float rotateLerp = 0.1f;
-
-    public float xRotation = 15f;
-
-    void Start()
-    {
-
-    }
+    float moveLerp = 0.25f;
+    float rotateLerp = 0.18f;
 
     void FixedUpdate()
     {
