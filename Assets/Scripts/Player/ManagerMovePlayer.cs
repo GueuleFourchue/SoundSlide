@@ -12,7 +12,7 @@ public class ManagerMovePlayer : MonoBehaviour
     public LevelUp caracLevel;
 
     [Header("Debut de lane")]
-    private float LevelOffset = 3.4f;
+    private float LevelOffset = 4.4f;
     public float decalageLane = 3;
 
     [Header("CheckPoint")]
@@ -331,6 +331,7 @@ public class ManagerMovePlayer : MonoBehaviour
     public void PlaySound()
     {
         timeAudio = (transform.position.z + (caracLevel.bpmValue * 0.1f) / LevelOffset ) / (caracLevel.unitByT * (caracLevel.bpmValue / 60));
+
 
         au.pitch = 1;
         au.volume = 0;
